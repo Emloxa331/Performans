@@ -2,197 +2,253 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>İngilizce Performans (BABALAR😎)</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg-color: #0b0f19;
-            --text-main: #e2e8f0;
-            --text-dim: #64748b;
-            --accent: #38bdf8;
-            --accent-glow: rgba(56, 189, 248, 0.4);
-            --highlight: #10b981;
-            --highlight-glow: rgba(16, 185, 129, 0.4);
+            --bg-dark: #050505;
+            --bg-card: rgba(20, 20, 20, 0.6);
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --accent: #3b82f6;
+            --accent-glow: rgba(59, 130, 246, 0.5);
+            --success: #10b981;
+            --success-glow: rgba(16, 185, 129, 0.5);
+            --border-color: rgba(255, 255, 255, 0.08);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
         
         body {
-            background: radial-gradient(circle at 50% 0%, #1e293b, var(--bg-color) 70%);
+            background-color: var(--bg-dark);
+            background-image: radial-gradient(circle at 50% 0%, #1e293b 0%, var(--bg-dark) 70%);
             color: var(--text-main);
             min-height: 100vh;
             overflow-x: hidden;
             scroll-behavior: smooth;
         }
 
-        /* Top Controls (Music & Language) */
+        /* --- Premium Top Navigation --- */
         #top-bar {
             position: fixed;
             top: 0; left: 0; width: 100%;
-            padding: 15px 5%;
+            padding: 12px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
-            background: rgba(11, 15, 25, 0.8);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            background: rgba(5, 5, 5, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-color);
+            transition: all 0.3s ease;
         }
 
-        .branding { font-weight: 800; font-size: 1.5rem; color: var(--accent); text-shadow: 0 0 10px var(--accent-glow); }
+        .branding { 
+            font-family: 'Poppins', sans-serif;
+            font-weight: 800; 
+            font-size: 1.4rem; 
+            background: linear-gradient(90deg, #fff, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+        }
         
+        .global-btns { display: flex; gap: 10px; }
+
         .global-btns button {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 8px 20px;
-            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 8px 16px;
+            border-radius: 8px;
             cursor: pointer;
             font-weight: 600;
-            transition: all 0.3s;
-            margin-left: 10px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
-        .global-btns button:hover {
-            background: var(--accent);
-            color: #000;
-            box-shadow: 0 0 15px var(--accent-glow);
-        }
+        .global-btns button:hover { background: rgba(255, 255, 255, 0.1); transform: translateY(-2px); }
 
-        /* Hero Section */
+        /* --- Hero Section --- */
         header.hero {
-            padding-top: 120px;
+            padding: 140px 20px 60px 20px;
             text-align: center;
-            margin-bottom: 40px;
+            max-width: 800px;
+            margin: 0 auto;
         }
-        .hero h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: 2px; }
-        .hero p { font-size: 1.2rem; color: var(--text-dim); }
+        
+        .hero h1 { 
+            font-family: 'Poppins', sans-serif;
+            font-size: 4rem; 
+            font-weight: 800; 
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        
+        .hero p { font-size: 1.2rem; color: var(--text-muted); line-height: 1.6; }
 
-        /* Prominent Speaker Selection Panel */
+        /* --- Premium Speaker Selection Panel --- */
         #speaker-selection {
-            max-width: 1000px;
+            max-width: 900px;
             margin: 0 auto 50px auto;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
             padding: 30px;
             text-align: center;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            backdrop-filter: blur(10px);
+            width: 90%;
         }
 
         #speaker-selection h2 {
-            font-size: 1.2rem;
-            color: var(--accent);
-            margin-bottom: 20px;
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 25px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            font-weight: 600;
         }
 
+        /* Mobile Responsive Grid for Buttons */
         .speaker-btns {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 12px;
         }
 
         .speaker-btn {
-            background: transparent;
-            border: 2px solid var(--text-dim);
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border-color);
             color: var(--text-main);
-            padding: 10px 20px;
+            padding: 12px 10px;
             border-radius: 12px;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .speaker-btn:hover { border-color: var(--accent); color: var(--accent); }
+        .speaker-btn:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.2); }
         
         .speaker-btn.active {
-            background: var(--highlight);
-            border-color: var(--highlight);
+            background: var(--success);
+            border-color: var(--success);
             color: #000;
-            box-shadow: 0 0 20px var(--highlight-glow);
+            box-shadow: 0 8px 20px var(--success-glow);
             transform: translateY(-3px);
         }
 
-        /* Floating Stats Badge */
         #stats-badge {
             display: inline-block;
-            margin-top: 20px;
+            margin-top: 25px;
             background: rgba(16, 185, 129, 0.1);
-            color: var(--highlight);
-            border: 1px solid var(--highlight);
-            padding: 8px 20px;
-            border-radius: 30px;
-            font-weight: bold;
+            color: var(--success);
+            border: 1px solid var(--success-glow);
+            padding: 8px 24px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
             opacity: 0;
-            transition: opacity 0.3s;
+            transition: opacity 0.4s ease;
         }
 
-        /* Script Layout (No Boxes) */
+        /* --- Dialog Script Layout (Modern Chat/Script Style) --- */
         #script-container {
-            max-width: 900px;
+            max-width: 800px;
             margin: 0 auto 100px auto;
             padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
 
         .script-line {
-            padding: 15px 0;
-            margin-bottom: 10px;
-            font-size: 1.25rem;
-            line-height: 1.6;
-            border-left: 4px solid transparent;
-            padding-left: 20px;
-            transition: all 0.5s ease;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid transparent;
+            border-left: 4px solid var(--border-color);
+            border-radius: 0 12px 12px 0;
+            padding: 20px;
+            font-size: 1.15rem;
+            line-height: 1.7;
+            transition: all 0.4s ease;
             opacity: 0;
             transform: translateY(20px);
+            position: relative;
+            overflow: hidden;
         }
 
         .script-line.visible { opacity: 1; transform: translateY(0); }
 
         .speaker-name {
+            display: block;
             color: var(--accent);
-            font-weight: 800;
-            margin-right: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 0.9rem;
             text-transform: uppercase;
-            font-size: 1.1rem;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
         }
 
-        /* Highlighting Logic */
+        /* Highlighting & Focus Logic */
         .script-line.dimmed {
-            opacity: 0.25;
-            filter: blur(1.5px);
+            opacity: 0.3;
+            filter: blur(2px) grayscale(50%);
             transform: scale(0.98);
         }
 
         .script-line.highlighted {
-            border-left-color: var(--highlight);
-            background: linear-gradient(90deg, rgba(16,185,129,0.1) 0%, rgba(0,0,0,0) 100%);
-            transform: scale(1.02) translateX(10px);
-            color: #fff;
-            text-shadow: 0 0 1px rgba(255,255,255,0.5);
+            background: linear-gradient(90deg, rgba(16, 185, 129, 0.08) 0%, transparent 100%);
+            border-left-color: var(--success);
+            border-top: 1px solid rgba(16, 185, 129, 0.1);
+            border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+            border-right: 1px solid rgba(16, 185, 129, 0.1);
+            transform: scale(1.03) translateX(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            z-index: 10;
         }
 
-        .script-line.highlighted .speaker-name { color: var(--highlight); }
+        .script-line.highlighted .speaker-name { color: var(--success); }
 
-        /* Language Toggle Classes */
-        .lang-tr { display: none; color: #94a3b8; font-style: italic; }
+        /* Language Logic */
+        .lang-tr { display: none; color: var(--text-muted); font-size: 1rem; margin-top: 8px; border-top: 1px dashed rgba(255,255,255,0.1); padding-top: 8px; }
         body.tr-active .lang-en { display: none; }
-        body.tr-active .lang-tr { display: inline; color: var(--text-main); font-style: normal; }
+        body.tr-active .lang-tr { display: block; color: var(--text-main); font-size: 1.15rem; border: none; padding: 0; margin: 0; }
 
         audio { display: none; }
 
+        /* --- MOBILE RESPONSIVE TWEAKS --- */
         @media (max-width: 768px) {
-            .speaker-btn { flex: 1 1 30%; font-size: 0.9rem; padding: 8px; }
-            .script-line { font-size: 1.1rem; }
-            header.hero h1 { font-size: 2.5rem; }
-            .branding { font-size: 1.2rem; }
-            .global-btns button { padding: 6px 12px; font-size: 0.9rem; }
+            #top-bar { padding: 12px 15px; }
+            .branding { font-size: 1.1rem; }
+            .global-btns button { padding: 6px 12px; font-size: 0.8rem; }
+            .global-btns button span { display: none; } /* Hide text, keep icons on very small screens */
+            
+            header.hero { padding-top: 100px; padding-bottom: 40px; }
+            .hero h1 { font-size: 2.8rem; letter-spacing: 2px; }
+            .hero p { font-size: 1rem; }
+
+            #speaker-selection { padding: 20px 15px; border-radius: 16px; width: 95%; }
+            .speaker-btns { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+            .speaker-btn { padding: 10px 5px; font-size: 0.85rem; }
+            .speaker-btn[onclick*="'all'"] { grid-column: span 2; } /* Make 'All' button full width on mobile */
+
+            .script-line { padding: 15px; font-size: 1.05rem; }
+        }
+
+        @media (max-width: 400px) {
+            .hero h1 { font-size: 2.2rem; }
+            .speaker-btns { grid-template-columns: 1fr; }
+            .speaker-btn[onclick*="'all'"] { grid-column: span 1; }
         }
     </style>
 </head>
@@ -203,27 +259,31 @@
         <source src="song2.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- Top Bar -->
+    <!-- Top Navigation Bar -->
     <div id="top-bar">
         <div class="branding">BABALAR 😎</div>
         <div class="global-btns">
-            <button id="lang-btn" onclick="toggleLanguage()">🇹🇷 TR Çeviri</button>
-            <button id="music-btn" onclick="toggleMusic()"><i class="fas fa-play"></i> Müzik</button>
+            <button id="lang-btn" onclick="toggleLanguage()">
+                <i class="fas fa-language"></i> <span id="lang-text">TR Çeviri</span>
+            </button>
+            <button id="music-btn" onclick="toggleMusic()">
+                <i class="fas fa-play"></i> <span id="music-text">Müzik</span>
+            </button>
         </div>
     </div>
 
     <!-- Hero Section -->
     <header class="hero">
-        <h1>ERZURUM</h1>
+        <h1>Erzurum</h1>
         <p class="lang-en">The Peak of History, Winter, and Culture</p>
         <p class="lang-tr">Tarihin, Kışın ve Kültürün Zirvesi</p>
     </header>
 
-    <!-- Prominent Speaker Selection -->
+    <!-- Mobile-Optimized Speaker Selection -->
     <div id="speaker-selection">
-        <h2>👇 KENDİ İSMİNİ SEÇ VE KONUŞMANI GÖR 👇</h2>
+        <h2>Kendi İsmini Seç & Odaklan</h2>
         <div class="speaker-btns">
-            <button class="speaker-btn active" onclick="highlightSpeaker('all', this)">👑 Herkes (Tüm Metin)</button>
+            <button class="speaker-btn active" onclick="highlightSpeaker('all', this)">👑 Tüm Metin</button>
             <button class="speaker-btn" onclick="highlightSpeaker('Mecit', this)">Mecit Taha</button>
             <button class="speaker-btn" onclick="highlightSpeaker('Melih', this)">Melih Furkan</button>
             <button class="speaker-btn" onclick="highlightSpeaker('Emrullah', this)">Emrullah</button>
@@ -239,120 +299,120 @@
 
         <!-- ROUND 1 -->
         <div class="script-line" data-speaker="Mecit">
-            <span class="speaker-name">Mecit:</span>
-            <span class="speech lang-en">Welcome to the BABALAR presentation! Today we are taking you to the icy peak of Turkey, Erzurum.</span>
-            <span class="speech lang-tr">BABALAR sunumuna hoş geldiniz! Bugün sizi Türkiye'nin buzlu zirvesi Erzurum'a götürüyoruz.</span>
+            <span class="speaker-name">Mecit</span>
+            <div class="speech lang-en">Hello everyone and welcome to our presentation! Today we are taking you to the icy peak of Turkey, Erzurum.</div>
+            <div class="speech lang-tr">Herkese merhaba ve sunumumuza hoş geldiniz! Bugün sizi Türkiye'nin buzlu zirvesi Erzurum'a götürüyoruz.</div>
         </div>
 
         <div class="script-line" data-speaker="Melih">
-            <span class="speaker-name">Melih:</span>
-            <span class="speech lang-en">It's the pearl of Eastern Anatolia. A magical city where history and winter perfectly come together.</span>
-            <span class="speech lang-tr">Orası Doğu Anadolu'nun incisidir. Tarih ve kışın kusursuzca bir araya geldiği büyülü bir şehir.</span>
+            <span class="speaker-name">Melih</span>
+            <div class="speech lang-en">It is known as the pearl of Eastern Anatolia. A magical city where history and winter perfectly come together.</div>
+            <div class="speech lang-tr">Doğu Anadolu'nun incisi olarak bilinir. Tarih ve kışın kusursuzca bir araya geldiği büyülü bir şehir.</div>
         </div>
 
         <div class="script-line" data-speaker="Emrullah">
-            <span class="speaker-name">Emrullah:</span>
-            <span class="speech lang-en">When you say Erzurum, the first thing is snow! Palandöken Mountain is a pure paradise for skiers.</span>
-            <span class="speech lang-tr">Erzurum deyince akla ilk kar gelir! Palandöken Dağı kayakçılar için tam bir cennettir.</span>
+            <span class="speaker-name">Emrullah</span>
+            <div class="speech lang-en">When you say Erzurum, the first thing is snow! Palandöken Mountain is a pure paradise for skiers.</div>
+            <div class="speech lang-tr">Erzurum deyince akla ilk kar gelir! Palandöken Dağı kayakçılar için tam bir cennettir.</div>
         </div>
 
         <div class="script-line" data-speaker="Sait">
-            <span class="speaker-name">Sait:</span>
-            <span class="speech lang-en">Exactly! It has some of the longest and steepest ski tracks in the world. The snow quality is just amazing.</span>
-            <span class="speech lang-tr">Kesinlikle! Dünyanın en uzun ve en dik kayak pistlerinden bazılarına sahip. Kar kalitesi tek kelimeyle inanılmaz.</span>
+            <span class="speaker-name">Sait</span>
+            <div class="speech lang-en">Exactly! It has some of the longest and steepest ski tracks in the world. The snow quality is just amazing.</div>
+            <div class="speech lang-tr">Kesinlikle! Dünyanın en uzun ve en dik kayak pistlerinden bazılarına sahip. Kar kalitesi tek kelimeyle inanılmaz.</div>
         </div>
 
         <div class="script-line" data-speaker="Yigit">
-            <span class="speaker-name">Yiğit:</span>
-            <span class="speech lang-en">But it's not just about skiing. Erzurum is like a giant open-air historical museum.</span>
-            <span class="speech lang-tr">Ama sadece kayaktan ibaret değil. Erzurum devasa bir açık hava tarih müzesi gibidir.</span>
+            <span class="speaker-name">Yiğit</span>
+            <div class="speech lang-en">But it's not just about skiing. Erzurum is like a giant open-air historical museum.</div>
+            <div class="speech lang-tr">Ama sadece kayaktan ibaret değil. Erzurum devasa bir açık hava tarih müzesi gibidir.</div>
         </div>
 
         <div class="script-line" data-speaker="Sefa">
-            <span class="speaker-name">Sefa:</span>
-            <span class="speech lang-en">Yes! The Double Minaret Madrasa is our iconic symbol. It's a true masterpiece from the Seljuk Empire.</span>
-            <span class="speech lang-tr">Evet! Çifte Minareli Medrese bizim ikonik sembolümüzdür. Selçuklu İmparatorluğu'ndan kalma gerçek bir şaheser.</span>
+            <span class="speaker-name">Sefa</span>
+            <div class="speech lang-en">Yes! The Double Minaret Madrasa is our iconic symbol. It's a true masterpiece from the Seljuk Empire.</div>
+            <div class="speech lang-tr">Evet! Çifte Minareli Medrese bizim ikonik sembolümüzdür. Selçuklu İmparatorluğu'ndan kalma gerçek bir şaheser.</div>
         </div>
 
         <!-- ROUND 2 -->
         <div class="script-line" data-speaker="Mecit">
-            <span class="speaker-name">Mecit:</span>
-            <span class="speech lang-en">You can also visit the historic Erzurum Castle and Yakutiye Madrasa. They have watched over the city for centuries.</span>
-            <span class="speech lang-tr">Ayrıca tarihi Erzurum Kalesi'ni ve Yakutiye Medresesi'ni de ziyaret edebilirsiniz. Yüzyıllardır şehri gözetliyorlar.</span>
+            <span class="speaker-name">Mecit</span>
+            <div class="speech lang-en">You can also visit the historic Erzurum Castle and Yakutiye Madrasa. They have watched over the city for centuries.</div>
+            <div class="speech lang-tr">Ayrıca tarihi Erzurum Kalesi'ni ve Yakutiye Medresesi'ni de ziyaret edebilirsiniz. Yüzyıllardır şehri gözetliyorlar.</div>
         </div>
 
         <div class="script-line" data-speaker="Melih">
-            <span class="speaker-name">Melih:</span>
-            <span class="speech lang-en">What about the local culture? The brave people of Erzurum are traditionally called "Dadaş".</span>
-            <span class="speech lang-tr">Peki ya yerel kültür? Erzurum'un cesur insanlarına geleneksel olarak "Dadaş" denir.</span>
+            <span class="speaker-name">Melih</span>
+            <div class="speech lang-en">What about the local culture? The brave people of Erzurum are traditionally called "Dadaş".</div>
+            <div class="speech lang-tr">Peki ya yerel kültür? Erzurum'un cesur insanlarına geleneksel olarak "Dadaş" denir.</div>
         </div>
 
         <div class="script-line" data-speaker="Emrullah">
-            <span class="speaker-name">Emrullah:</span>
-            <span class="speech lang-en">Dadaş means brother, brave man, and a generous host. We welcome every guest with open arms here.</span>
-            <span class="speech lang-tr">Dadaş; kardeş, yiğit adam ve cömert ev sahibi demektir. Burada her misafiri kollarımızı açarak karşılarız.</span>
+            <span class="speaker-name">Emrullah</span>
+            <div class="speech lang-en">Dadaş means brother, brave man, and a generous host. We welcome every guest with open arms here.</div>
+            <div class="speech lang-tr">Dadaş; kardeş, yiğit adam ve cömert ev sahibi demektir. Burada her misafiri kollarımızı açarak karşılarız.</div>
         </div>
 
         <div class="script-line" data-speaker="Sait">
-            <span class="speaker-name">Sait:</span>
-            <span class="speech lang-en">If you want a special souvenir, you must buy Oltu Stone. It's a beautiful black stone used for amazing rings and rosaries.</span>
-            <span class="speech lang-tr">Özel bir hatıra istiyorsanız mutlaka Oltu Taşı almalısınız. Harika yüzükler ve tespihler için kullanılan güzel siyah bir taştır.</span>
+            <span class="speaker-name">Sait</span>
+            <div class="speech lang-en">If you want a special souvenir, you must buy Oltu Stone. It's a beautiful black stone used for amazing rings and rosaries.</div>
+            <div class="speech lang-tr">Özel bir hatıra istiyorsanız mutlaka Oltu Taşı almalısınız. Harika yüzükler ve tespihler için kullanılan güzel siyah bir taştır.</div>
         </div>
 
         <div class="script-line" data-speaker="Yigit">
-            <span class="speaker-name">Yiğit:</span>
-            <span class="speech lang-en">Now, my favorite part: Food! You simply cannot leave Erzurum without eating the famous Cağ Kebabı.</span>
-            <span class="speech lang-tr">Şimdi en sevdiğim kısım: Yemek! Meşhur Cağ Kebabı'nı yemeden Erzurum'dan ayrılamazsınız.</span>
+            <span class="speaker-name">Yiğit</span>
+            <div class="speech lang-en">Now, my favorite part: Food! You simply cannot leave Erzurum without eating the famous Cağ Kebabı.</div>
+            <div class="speech lang-tr">Şimdi en sevdiğim kısım: Yemek! Meşhur Cağ Kebabı'nı yemeden Erzurum'dan ayrılamazsınız.</div>
         </div>
 
         <div class="script-line" data-speaker="Sefa">
-            <span class="speaker-name">Sefa:</span>
-            <span class="speech lang-en">Oh, it's legendary! Delicious lamb meat roasted horizontally over a wood fire. It is simply mouth-watering.</span>
-            <span class="speech lang-tr">Ah, o efsanedir! Odun ateşinde yatay olarak kızartılmış leziz kuzu eti. Kelimenin tam anlamıyla ağız sulandırıyor.</span>
+            <span class="speaker-name">Sefa</span>
+            <div class="speech lang-en">Oh, it is legendary! Delicious lamb meat roasted horizontally over a wood fire. It is simply mouth-watering.</div>
+            <div class="speech lang-tr">Ah, o efsanedir! Odun ateşinde yatay olarak kızartılmış leziz kuzu eti. Kelimenin tam anlamıyla ağız sulandırıyor.</div>
         </div>
 
         <!-- ROUND 3 -->
         <div class="script-line" data-speaker="Mecit">
-            <span class="speaker-name">Mecit:</span>
-            <span class="speech lang-en">And for dessert? Kadayıf Dolması! It's a crispy, sweet pastry stuffed with crushed walnuts.</span>
-            <span class="speech lang-tr">Peki ya tatlı? Kadayıf Dolması! Dövülmüş cevizle doldurulmuş çıtır, tatlı bir hamur işidir.</span>
+            <span class="speaker-name">Mecit</span>
+            <div class="speech lang-en">And for dessert? Kadayıf Dolması! It's a crispy, sweet pastry stuffed with crushed walnuts.</div>
+            <div class="speech lang-tr">Peki ya tatlı? Kadayıf Dolması! Dövülmüş cevizle doldurulmuş çıtır, tatlı bir hamur işidir.</div>
         </div>
 
         <div class="script-line" data-speaker="Melih">
-            <span class="speaker-name">Melih:</span>
-            <span class="speech lang-en">Don't forget the Ayran Aşı soup and Su Böreği for your breakfast. Our local cuisine is incredibly rich.</span>
-            <span class="speech lang-tr">Kahvaltınız için Ayran Aşı çorbasını ve Su Böreği'ni de unutmayın. Yöresel mutfağımız inanılmaz derecede zengindir.</span>
+            <span class="speaker-name">Melih</span>
+            <div class="speech lang-en">Don't forget the Ayran Aşı soup and Su Böreği for your breakfast. Our local cuisine is incredibly rich.</div>
+            <div class="speech lang-tr">Kahvaltınız için Ayran Aşı çorbasını ve Su Böreği'ni de unutmayın. Yöresel mutfağımız inanılmaz derecede zengindir.</div>
         </div>
 
         <div class="script-line" data-speaker="Emrullah">
-            <span class="speaker-name">Emrullah:</span>
-            <span class="speech lang-en">To sum everything up, Erzurum gives you very cold winters but the warmest and most sincere smiles.</span>
-            <span class="speech lang-tr">Her şeyi özetlemek gerekirse; Erzurum size çok soğuk kışlar ama en sıcak ve en samimi gülümsemeleri sunar.</span>
+            <span class="speaker-name">Emrullah</span>
+            <div class="speech lang-en">To sum everything up, Erzurum gives you very cold winters but the warmest and most sincere smiles.</div>
+            <div class="speech lang-tr">Her şeyi özetlemek gerekirse; Erzurum size çok soğuk kışlar ama en sıcak ve en samimi gülümsemeleri sunar.</div>
         </div>
 
         <div class="script-line" data-speaker="Sait">
-            <span class="speaker-name">Sait:</span>
-            <span class="speech lang-en">We really hope you enjoyed this quick and exciting tour of our beautiful city.</span>
-            <span class="speech lang-tr">Güzel şehrimizin bu hızlı ve heyecan verici turundan gerçekten keyif aldığınızı umuyoruz.</span>
+            <span class="speaker-name">Sait</span>
+            <div class="speech lang-en">We really hope you enjoyed this quick and exciting tour of our beautiful city.</div>
+            <div class="speech lang-tr">Güzel şehrimizin bu hızlı ve heyecan verici turundan gerçekten keyif aldığınızı umuyoruz.</div>
         </div>
 
         <div class="script-line" data-speaker="Yigit">
-            <span class="speaker-name">Yiğit:</span>
-            <span class="speech lang-en">Thank you to our dear teacher and all of our friends for listening to us today.</span>
-            <span class="speech lang-tr">Bugün bizi dinleyen değerli öğretmenimize ve tüm arkadaşlarımıza teşekkür ederiz.</span>
+            <span class="speaker-name">Yiğit</span>
+            <div class="speech lang-en">Thank you to our dear teacher and all of our friends for listening to us today.</div>
+            <div class="speech lang-tr">Bugün bizi dinleyen değerli öğretmenimize ve tüm arkadaşlarımıza teşekkür ederiz.</div>
         </div>
 
         <div class="script-line" data-speaker="Sefa">
-            <span class="speaker-name">Sefa:</span>
-            <span class="speech lang-en">We are the BABALAR team. We hope to see you all in Erzurum one day! Goodbye!</span>
-            <span class="speech lang-tr">Biz BABALAR ekibiyiz. Bir gün hepinizi Erzurum'da görmeyi umuyoruz! Hoşça kalın!</span>
+            <span class="speaker-name">Sefa</span>
+            <div class="speech lang-en">We are thrilled to have shared this with you. We hope to see you all in Erzurum one day! Goodbye!</div>
+            <div class="speech lang-tr">Bunu sizinle paylaşmaktan heyecan duyduk. Bir gün hepinizi Erzurum'da görmeyi umuyoruz! Hoşça kalın!</div>
         </div>
 
     </div>
 
-    <!-- Script Logic -->
+    <!-- Interactive Logic -->
     <script>
-        // 1. Scroll Animation for lines
+        // 1. Smooth Scroll Animation
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -363,57 +423,62 @@
 
         document.querySelectorAll('.script-line').forEach((el) => observer.observe(el));
         
-        // Trigger first few lines immediately
+        // Trigger the first elements immediately for a good impression
         setTimeout(() => {
             document.querySelectorAll('.script-line').forEach((el, index) => {
-                if(index < 5) el.classList.add('visible');
+                if(index < 4) el.classList.add('visible');
             });
-        }, 100);
+        }, 150);
 
-        // 2. Language Toggle Logic
+        // 2. Language Toggle
         let isTurkish = false;
         function toggleLanguage() {
             const body = document.body;
+            const btnText = document.getElementById('lang-text');
             const btn = document.getElementById('lang-btn');
             isTurkish = !isTurkish;
             
             if (isTurkish) {
                 body.classList.add('tr-active');
-                btn.innerHTML = '🇬🇧 EN Çeviri';
-                btn.style.background = 'var(--accent)';
-                btn.style.color = '#000';
+                btnText.innerText = 'EN Çeviri';
+                btn.style.borderColor = 'var(--success)';
+                btn.style.color = 'var(--success)';
             } else {
                 body.classList.remove('tr-active');
-                btn.innerHTML = '🇹🇷 TR Çeviri';
-                btn.style.background = 'rgba(255, 255, 255, 0.1)';
-                btn.style.color = 'white';
+                btnText.innerText = 'TR Çeviri';
+                btn.style.borderColor = 'var(--border-color)';
+                btn.style.color = 'var(--text-main)';
             }
         }
 
-        // 3. Audio Logic
+        // 3. Audio Toggle
         const audio = document.getElementById('bg-music');
         let isPlaying = false;
         function toggleMusic() {
+            const btnText = document.getElementById('music-text');
             const btn = document.getElementById('music-btn');
+            const icon = btn.querySelector('i');
+            
             if (isPlaying) {
                 audio.pause();
-                btn.innerHTML = '<i class="fas fa-play"></i> Müzik';
-                btn.style.background = 'rgba(255, 255, 255, 0.1)';
-                btn.style.color = 'white';
+                btnText.innerText = 'Müzik';
+                icon.className = 'fas fa-play';
+                btn.style.borderColor = 'var(--border-color)';
+                btn.style.color = 'var(--text-main)';
             } else {
-                audio.volume = 0.2; // Hafif bir ses seviyesi
+                audio.volume = 0.2; // Background volume
                 audio.play();
-                btn.innerHTML = '<i class="fas fa-pause"></i> Müziği Durdur';
-                btn.style.background = 'var(--highlight)';
-                btn.style.color = '#000';
-                btn.style.borderColor = 'var(--highlight)';
+                btnText.innerText = 'Durdur';
+                icon.className = 'fas fa-pause';
+                btn.style.borderColor = 'var(--accent)';
+                btn.style.color = 'var(--accent)';
             }
             isPlaying = !isPlaying;
         }
 
-        // 4. Advanced Speaker Highlighting Logic
+        // 4. Focus Mode (Speaker Highlighting)
         function highlightSpeaker(speakerName, clickedBtn) {
-            // Update active button styles
+            // Manage button active states
             document.querySelectorAll('.speaker-btn').forEach(btn => btn.classList.remove('active'));
             clickedBtn.classList.add('active');
 
@@ -440,9 +505,19 @@
                 }
             });
 
-            // Update Badge
+            // Update status badge
             badge.innerText = `🎤 Bu metinde ${count} konuşman var, sahne senin!`;
             badge.style.opacity = '1';
+            
+            // Smooth scroll to the first highlighted line if on mobile
+            if(window.innerWidth <= 768) {
+                const firstHighlighted = document.querySelector('.script-line.highlighted');
+                if(firstHighlighted) {
+                    setTimeout(() => {
+                        firstHighlighted.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }, 300);
+                }
+            }
         }
     </script>
 </body>
