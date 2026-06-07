@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İngilizce Performans (BABALAR😎)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #38bdf8;
+            --accent-glow: rgba(56, 189, 248, 0.5);
+            --highlight: #10b981;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        
+        body {
+            background: linear-gradient(135deg, #020617, #0f172a, #1e293b);
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Fixed Top Controls */
+        #controls {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(15px);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .branding { font-weight: 800; font-size: 1.2rem; color: var(--accent); letter-spacing: 1px;}
+        
+        .control-group { display: flex; gap: 15px; align-items: center; }
+
+        button, select {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        select { appearance: none; padding-right: 30px; }
+        select option { background: var(--bg-color); color: white; }
+        
+        button:hover, select:hover { background: var(--accent); color: #000; border-color: var(--accent); box-shadow: 0 0 15px var(--accent-glow); }
+
+        #stats-badge {
+            background: var(--highlight);
+            color: #000;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 800;
+            display: none;
+            animation: popIn 0.3s ease forwards;
+        }
+
+        /* Hero Section */
+        header.hero {
+            height: 50vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin-top: 70px;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        .hero h1 { font-size: 4rem; font-weight: 800; text-transform: uppercase; background: linear-gradient(to right, #fff, var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; }
+        .hero p { font-size: 1.2rem; color: var(--text-muted); max-width: 600px; }
+
+        /* Content Blocks */
+        .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; display: flex; flex-direction: column; gap: 30px; }
+
+        .speech-block {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 30px;
+            position: relative;
+            backdrop-filter: blur(10px);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .speech-block.visible { opacity: 1; transform: translateY(0); }
+        
+        /* Highlighting Logic */
+        .speech-block.dimmed { opacity: 0.3; transform: scale(0.98); filter: grayscale(80%); }
+        .speech-block.highlighted { 
+            border-color: var(--highlight); 
+            box-shadow: 0 0 25px rgba(16, 185, 129, 0.2); 
+            transform: scale(1.02); 
+            z-index: 10;
+        }
+
+        .speaker-name {
+            display: inline-block;
+            background: rgba(255,255,255,0.1);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .speech-block.highlighted .speaker-name { background: var(--highlight); color: #000; }
+
+        .text-content { font-size: 1.15rem; line-height: 1.8; }
+        
+        .lang-tr { display: none; color: #cbd5e1; }
+        
+        /* Language Toggle State */
+        body.tr-active .lang-en { display: none; }
+        body.tr-active .lang-tr { display: block; }
+
+        /* Audio Element */
+        audio { display: none; }
+
+        @keyframes popIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            #controls { flex-direction: column; gap: 15px; padding: 15px; }
+            header.hero { margin-top: 120px; }
+            .hero h1 { font-size: 2.5rem; }
+            .control-group { width: 100%; justify-content: center; flex-wrap: wrap; }
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="bg-music" loop>
+        <source src="song2.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="controls">
+        <div class="branding">BABALAR 😎</div>
+        <div class="control-group">
+            <span id="stats-badge">0 Konuşma</span>
+            
+            <select id="speaker-selector" onchange="highlightSpeaker()">
+                <option value="all">👑 Tüm Ekip (All)</option>
+                <option value="Mecit">Mecit Taha Karabut</option>
+                <option value="Melih">Melih Furkan Pak</option>
+                <option value="Emrullah">Muhammed Emrullah Gezgel</option>
+                <option value="Sait">Muhammed Sait Dinler</option>
+                <option value="Yigit">Muhammed Yiğit Öğür</option>
+                <option value="Sefa">Muhammed Sefa Karakaşlı</option>
+            </select>
+
+            <button id="lang-btn" onclick="toggleLanguage()">🇹🇷 Türkçeye Çevir</button>
+            <button id="music-btn" onclick="toggleMusic()"><i class="fas fa-play"></i> Müzik</button>
+        </div>
+    </div>
+
+    <header class="hero">
+        <h1>Erzurum</h1>
+        <p class="lang-en">The Pearl of Eastern Anatolia. History, Culture, and Winter Tourism.</p>
+        <p class="lang-tr">Doğu Anadolu'nun İncisi. Tarih, Kültür ve Kış Turizmi.</p>
+    </header>
+
+    <div class="container" id="presentation-content">
+
+        <div class="speech-block" data-speaker="Mecit">
+            <div class="speaker-name"><i class="fas fa-user-astronaut"></i> Mecit Taha Karabut</div>
+            <div class="text-content">
+                <p class="lang-en">Hello everyone and welcome to our presentation. Today, our team will take you on an unforgettable journey to Erzurum, the majestic city of Eastern Anatolia. Located at a high altitude, Erzurum is not just a city; it's a fortress of history and a paradise of white snow. Let's explore its magic together.</p>
+                <p class="lang-tr">Herkese merhaba ve sunumumuza hoş geldiniz. Bugün ekibimiz sizi Doğu Anadolu'nun görkemli şehri Erzurum'a unutulmaz bir yolculuğa çıkaracak. Yüksek bir rakımda yer alan Erzurum sadece bir şehir değil; tarihin kalesi ve beyaz karın cennetidir. Gelin bu büyüyü birlikte keşfedelim.</p>
+            </div>
+        </div>
+
+        <div class="speech-block" data-speaker="Melih">
+            <div class="speaker-name"><i class="fas fa-user-astronaut"></i> Melih Furkan Pak</div>
+            <div class="text-content">
+                <p class="lang-en">Erzurum has a deeply rooted history that dates back to ancient civilizations. It served as a crucial crossroad on the historical Silk Road. From the Seljuk Empire to the foundation of the modern Turkish Republic, where the famous Erzurum Congress was held in 1919, every street here echoes with the footsteps of the past.</p>
+                <p class="lang-tr">Erzurum, kökleri antik medeniyetlere dayanan çok derin bir tarihe sahiptir. Tarihi İpek Yolu üzerinde çok önemli bir kavşak olarak hizmet etmiştir. Selçuklu İmparatorluğu'ndan, 1919'da ünlü Erzurum Kongresi'nin yapıldığı modern Türkiye Cumhuriyeti'nin kuruluşuna kadar, buradaki her sokakta geçmişin ayak sesleri yankılanmaktadır.</p>
+            </div>
+        </div>
+
+        <div class="speech-block" data-speaker="Emrullah">
+            <div class="speaker-name"><i class="fas fa-user-astronaut"></i> Muhammed Emrullah Gezgel</div>
+            <div class="text-content">
+                <p class="lang-en">When we talk about Erzurum, the first thing that comes to mind is winter tourism. The Palandöken Mountain is a global hotspot for winter sports. Covered with high-quality powder snow, it offers an incredibly long skiing season. In 2011, it proudly hosted the Winter Universiade, proving its world-class facilities.</p>
+                <p class="lang-tr">Erzurum denilince akla ilk olarak kış turizmi gelmektedir. Palandöken Dağı, kış sporları için küresel bir merkezdir. Yüksek kaliteli toz karla kaplı olan bu dağ, inanılmaz derecede uzun bir kayak sezonu sunar. 2011 yılında Kış Üniversite Oyunları'na gururla ev sahipliği yaparak dünya standartlarındaki tesislerini kanıtlamıştır.</p>
+            </div>
+        </div>
+
+        <div class="speech-block" data-speaker="Sait">
+            <div class="speaker-name"><i class="fas fa-user-astronaut"></i> Muhammed Sait Dinler</div>
+            <div class="text-content">
+                <p class="lang-en">Adding to what Emrullah said, Palandöken Ski Resort features some of the longest and steepest ski runs in the entire world, including the famous "Ejder" (Dragon) track. Whether you are a beginner taking your first steps on the snow or a professional seeking an adrenaline rush, Palandöken has the perfect track for you.</p>
+                <p class="lang-tr">Emrullah'ın söylediklerine ek olarak, Palandöken Kayak Merkezi meşhur "Ejder" pisti de dahil olmak üzere tüm dünyadaki en uzun ve en dik kayak pistlerinden bazılarına sahiptir. İster karda ilk adımlarını atan bir acemi olun, ister adrenalin arayan bir profesyonel, Palandöken'de sizin için mükemmel bir pist var.</p>
+            </div>
+        </div>
+
+        <div class="speech-block" data-speaker="Yigit">
+            <div class="speaker-name"><i class="fas fa-user-astronaut"></i> Muhammed Yiğit Öğür</div>
+            <div class="text-content">
+                <p class="lang-en">Beyond the snow, Erzurum is an open-air museum. The Double Minaret Madrasa (Çifte Minareli Medrese) is the absolute symbol of the city. Built during the Seljuk period, its magnificent crown gate and twin minarets decorated with colorful tiles are a masterpiece of medieval Islamic architecture.</p>
+                <p class="lang-tr">Karların ötesinde Erzurum bir açık hava müzesidir. Çifte Minareli Medrese şehrin mutlak sembolüdür. Selçuklu döneminde inşa edilen, renkli çinilerle süslenmiş muhteşem taç kapısı ve ikiz minareleri, Ortaçağ İslam mimarisinin bir şaheseridir.</p>
+            </div>
+        </div>
+
+        <div class="speech-block" data-speaker="Sefa">
+            <div class="speaker-name"><i class="fas fa-user-astronaut"></i> Muhammed Sefa Karakaşlı</div>
+            <div class="text-content">
+                <p class="lang-en">Another breathtaking landmark is the Yakutiye Madrasa, built by the Ilkhanids in 1310. Today, it serves as the Museum of Islamic and Turkish Arts. You should also visit the historic Erzurum Castle and the Clock Tower, which watch over the city, offering a panoramic view of the magnificent plains and mountains.</p>
+                <p class="lang-tr">Bir diğer nefes kesici yapı ise 1310 yılında İlhanlılar tarafından yaptırılan Yakutiye Medresesi'dir. Bugün İslam ve Türk Eserleri Müzesi olarak hizmet vermektedir. Şehri gözetleyen, muhteşem ovaların ve dağların panoramik manzarasını sunan tarihi Erzurum Kalesi ve Saat Kulesi'ni de mutlaka ziyaret etmelisiniz.</p>
+            </div>
+        </div>
+
+        <div class="speech-block" data-speaker="Mecit">
+            <div class="speaker-name"><i class="fas fa-user-astronaut"></i> Mecit Taha Karabut</div>
+            <div class="text-content">
+                <p class="lang-en">Now, let's dive into the local culture. The people of Erzurum are famously referred to as "Dadaş." A Dadaş is not just a person; it's a concept representing bravery, unwavering brotherhood, and immense hospitality. The traditional folk dance, "Bar," is performed shoulder to shoulder, symbolizing this deep unity.</p>
+                <p class="lang-tr">Şimdi yerel kültüre dalalım. Erzurum halkı meşhur bir şekilde "Dadaş" olarak anılır. Dadaş sadece bir insan değil; cesareti, sarsılmaz kardeşliği ve muazzam misafirperverliği temsil eden bir kavramdır. Geleneksel halk oyunu olan "Bar", bu derin birliği sembolize edecek şekilde omuz omuza oynanır.</p>
+            </div>
+        </div>
+
+        <div class="speech-block" data-speaker="Melih">
+            <div class="speaker-name"><i class="fas fa-user-astronaut"></i> Melih Furkan Pak</div>
+            <div class="text-content">
+                <p class="lang-en">When it comes to local crafts, the "Oltu Stone" is universally famous. Extracted in the Oltu district, it is a type of black amber that is incredibly easy to carve. Local artisans masterfully craft it into stunning rosaries (tesbih), rings, and jewelry. It is the most meaningful souvenir you can bring back from Erzurum.</p>
+                <p class="lang-tr">Yerel el sanatları söz konusu olduğunda "Oltu Taşı" evrensel bir üne sahiptir. Oltu ilçesinde çıkarılan, oyulması inanılmaz derecede kolay olan siyah bir kehribar türüdür. Yerel zanaatkarlar ustalıkla işleyerek çarpıcı tesbihlere, yüzüklere ve takılara dönüştürür. Erzurum'dan getirebileceğiniz en anlamlı hediyelik eşyadır.</p>
+            </div>
+        </div>
+
+        <div class="speech-block" data-speaker="Emrullah">
+            <div class="speaker-name"><i class="fas fa-user-astronaut"></i> Muhammed Emrullah Gezgel</div>
+            <div class="text-content">
+                <p class="lang-en">Of course, we cannot conclude our presentation without exploring the culinary delights. The undisputed king of Erzurum cuisine is "Cağ Kebabı." It is horizontally roasted lamb meat, marinated for days with onion, basil, and black pepper, cooked over a wood fire. It is an absolute feast for meat lovers.</p>
+                <p class="lang-tr">Elbette mutfak lezzetlerini keşfetmeden sunumumuzu sonlandıramayız. Erzurum mutfağının tartışmasız kralı "Cağ Kebabı"dır. Soğan, fesleğen ve karabiberle günlerce marine edilerek odun ateşinde yatay olarak kızartılan kuzu etidir. Et severler için mutlak bir ziyafettir.</p>
+            </div>
+        </div>
+
+        <div class="speech-block" data-speaker="Sait">
+            <div class="speaker-name"><i class="fas fa-user-astronaut"></i> Muhammed Sait Dinler</div>
+            <div class="text-content">
+                <p class="lang-en">After a hearty portion of Cağ Kebabı, you simply must try the legendary dessert: "Kadayıf Dolması." It consists of shredded phyllo dough stuffed with crushed walnuts, rolled up, deep-fried until perfectly crispy, and then soaked in a rich, sweet syrup. It is a heavenly ending to an Erzurum meal.</p>
+                <p class="lang-tr">Doyurucu bir porsiyon Cağ Kebabı'ndan sonra, efsanevi tatlıyı mutlaka denemelisiniz: "Kadayıf Dolması." Dövülmüş cevizle doldurulmuş, rulo haline getirilmiş, mükemmel bir şekilde çıtırlaşana kadar derin yağda kızartılmış ve ardından zengin, tatlı bir şerbete batırılmış tel kadayıftan oluşur. Erzurum yemeğinin cennet gibi bir sonudur.</p>
+            </div>
+        </div>
+
+        <div class="speech-block" data-speaker="Yigit">
+            <div class="speaker-name"><i class="fas fa-user-astronaut"></i> Muhammed Yiğit Öğür</div>
+            <div class="text-content">
+                <p class="lang-en">Let's not forget the other local gems. "Ayran Aşı" is a refreshing, traditional soup made with yogurt, chickpeas, and a local herb called 'aş otu' (coriander). Also, the Erzurum-style "Su Böreği" (Water Borek) is made with civil cheese and requires incredible skill to prepare, making it a staple of local breakfasts.</p>
+                <p class="lang-tr">Diğer yerel cevherleri de unutmayalım. "Ayran Aşı" yoğurt, nohut ve 'aş otu' adı verilen yerel bir otla yapılan ferahlatıcı, geleneksel bir çorbadır. Ayrıca civil peyniriyle yapılan ve hazırlaması inanılmaz bir ustalık gerektiren Erzurum usulü "Su Böreği" yöresel kahvaltıların vazgeçilmezidir.</p>
+            </div>
+        </div>
+
+        <div class="speech-block" data-speaker="Sefa">
+            <div class="speaker-name"><i class="fas fa-user-astronaut"></i> Muhammed Sefa Karakaşlı</div>
+            <div class="text-content">
+                <p class="lang-en">In conclusion, Erzurum is a magnificent city where the cold climate is warmed by the hospitality of its people. From the slopes of Palandöken to the rich flavors of its cuisine, it promises unforgettable memories. Thank you all for listening to the BABALAR team's presentation today!</p>
+                <p class="lang-tr">Sonuç olarak Erzurum, soğuk iklimin insanının misafirperverliği ile ısındığı muhteşem bir şehirdir. Palandöken'in eteklerinden, mutfağının zengin lezzetlerine kadar unutulmaz anılar vaat ediyor. BABALAR ekibinin bugünkü sunumunu dinlediğiniz için hepinize teşekkür ederiz!</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // 1. Scroll Animation Logic
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.speech-block').forEach((el) => observer.observe(el));
+        
+        // Trigger first elements immediately
+        setTimeout(() => {
+            document.querySelectorAll('.speech-block').forEach((el, index) => {
+                if(index < 3) el.classList.add('visible');
+            });
+        }, 100);
+
+        // 2. Language Toggle Logic
+        let isTurkish = false;
+        function toggleLanguage() {
+            const body = document.body;
+            const btn = document.getElementById('lang-btn');
+            isTurkish = !isTurkish;
+            
+            if (isTurkish) {
+                body.classList.add('tr-active');
+                btn.innerHTML = '🇬🇧 Switch to English';
+            } else {
+                body.classList.remove('tr-active');
+                btn.innerHTML = '🇹🇷 Türkçeye Çevir';
+            }
+        }
+
+        // 3. Audio Logic
+        const audio = document.getElementById('bg-music');
+        let isPlaying = false;
+        function toggleMusic() {
+            const btn = document.getElementById('music-btn');
+            if (isPlaying) {
+                audio.pause();
+                btn.innerHTML = '<i class="fas fa-play"></i> Müzik';
+                btn.style.background = 'rgba(255, 255, 255, 0.1)';
+            } else {
+                audio.volume = 0.3; // Müzik çok bağırıp sesinizi bastırmasın
+                audio.play();
+                btn.innerHTML = '<i class="fas fa-pause"></i> Kapat';
+                btn.style.background = 'var(--accent)';
+                btn.style.color = '#000';
+            }
+            isPlaying = !isPlaying;
+        }
+
+        // 4. Speaker Highlighting Logic
+        function highlightSpeaker() {
+            const selectedSpeaker = document.getElementById('speaker-selector').value;
+            const blocks = document.querySelectorAll('.speech-block');
+            const badge = document.getElementById('stats-badge');
+            
+            let count = 0;
+
+            if (selectedSpeaker === 'all') {
+                blocks.forEach(block => {
+                    block.classList.remove('dimmed');
+                    block.classList.remove('highlighted');
+                });
+                badge.style.display = 'none';
+                return;
+            }
+
+            blocks.forEach(block => {
+                if (block.getAttribute('data-speaker') === selectedSpeaker) {
+                    block.classList.remove('dimmed');
+                    block.classList.add('highlighted');
+                    count++;
+                } else {
+                    block.classList.remove('highlighted');
+                    block.classList.add('dimmed');
+                }
+            });
+
+            // Update Stats Badge
+            badge.style.display = 'inline-block';
+            badge.innerText = `🎤 Senin Sıran: ${count} Paragraf`;
+            
+            // Re-trigger animation for badge
+            badge.style.animation = 'none';
+            badge.offsetHeight; /* trigger reflow */
+            badge.style.animation = null; 
+        }
+    </script>
+</body>
+</html>
