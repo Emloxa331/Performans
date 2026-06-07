@@ -50,10 +50,17 @@
             font-family: 'Poppins', sans-serif;
             font-weight: 800; 
             font-size: 1.4rem; 
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Renk efekti sadece yazıya uygulanır, emoji etkilenmez */
+        .brand-text {
             background: linear-gradient(90deg, #fff, var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: 1px;
         }
         
         .global-btns { display: flex; gap: 10px; }
@@ -231,7 +238,7 @@
             #top-bar { padding: 12px 15px; }
             .branding { font-size: 1.1rem; }
             .global-btns button { padding: 6px 12px; font-size: 0.8rem; }
-            .global-btns button span { display: none; } /* Hide text, keep icons on very small screens */
+            .global-btns button span { display: none; }
             
             header.hero { padding-top: 100px; padding-bottom: 40px; }
             .hero h1 { font-size: 2.8rem; letter-spacing: 2px; }
@@ -240,7 +247,7 @@
             #speaker-selection { padding: 20px 15px; border-radius: 16px; width: 95%; }
             .speaker-btns { grid-template-columns: repeat(2, 1fr); gap: 8px; }
             .speaker-btn { padding: 10px 5px; font-size: 0.85rem; }
-            .speaker-btn[onclick*="'all'"] { grid-column: span 2; } /* Make 'All' button full width on mobile */
+            .speaker-btn[onclick*="'all'"] { grid-column: span 2; }
 
             .script-line { padding: 15px; font-size: 1.05rem; }
         }
@@ -261,7 +268,10 @@
 
     <!-- Top Navigation Bar -->
     <div id="top-bar">
-        <div class="branding">BABALAR 😎</div>
+        <div class="branding">
+            <span class="brand-text">BABALAR</span>
+            <span>😎</span>
+        </div>
         <div class="global-btns">
             <button id="lang-btn" onclick="toggleLanguage()">
                 <i class="fas fa-language"></i> <span id="lang-text">TR Çeviri</span>
@@ -283,7 +293,7 @@
     <div id="speaker-selection">
         <h2>Kendi İsmini Seç & Odaklan</h2>
         <div class="speaker-btns">
-            <button class="speaker-btn active" onclick="highlightSpeaker('all', this)">👑 Tüm Metin</button>
+            <button class="speaker-btn active" onclick="highlightSpeaker('all', this)">Tüm Metin</button>
             <button class="speaker-btn" onclick="highlightSpeaker('Mecit', this)">Mecit Taha</button>
             <button class="speaker-btn" onclick="highlightSpeaker('Melih', this)">Melih Furkan</button>
             <button class="speaker-btn" onclick="highlightSpeaker('Emrullah', this)">Emrullah</button>
