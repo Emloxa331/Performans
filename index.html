@@ -105,6 +105,7 @@
         .tab-container {
             display: flex;
             justify-content: center;
+            flex-wrap: wrap;
             gap: 15px;
             margin-bottom: 40px;
             padding: 0 20px;
@@ -114,7 +115,7 @@
             background: var(--bg-card);
             border: 1px solid var(--border-color);
             color: var(--text-muted);
-            padding: 12px 30px;
+            padding: 12px 25px;
             border-radius: 30px;
             font-size: 1.05rem;
             font-weight: 600;
@@ -284,10 +285,50 @@
             padding-left: 30px;
         }
 
+        /* --- Panel 3: Poster Summary --- */
+        #summary-container {
+            max-width: 800px;
+            margin: 0 auto 100px auto;
+            padding: 0 20px;
+        }
+
+        .summary-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+            position: relative;
+        }
+
+        .summary-title {
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 800;
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .summary-paragraph {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: var(--text-main);
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
         /* Language Logic */
         .lang-tr { display: none; color: var(--text-muted); font-size: 0.95rem; margin-top: 8px; border-top: 1px dashed rgba(255,255,255,0.1); padding-top: 8px; }
+        
+        /* Summary Card specific language styles */
+        .summary-card .lang-tr { font-size: 1.15rem; color: var(--text-muted); font-style: italic; }
+        
         body.tr-active .lang-en { display: none; }
-        body.tr-active .lang-tr { display: block; color: var(--text-main); font-size: 1.05rem; border: none; padding: 0; margin: 0; }
+        body.tr-active .lang-tr { display: block; color: var(--text-main); font-size: 1.1rem; border: none; padding: 0; margin: 0; font-style: normal; }
+        body.tr-active .summary-card .lang-tr { font-size: 1.15rem; }
 
         @media (max-width: 768px) {
             #top-bar { padding: 12px 15px; }
@@ -301,6 +342,9 @@
             .speaker-btn[onclick*="'all'"] { grid-column: span 2; }
             .script-line, .answer { font-size: 1rem; }
             .question { font-size: 1.05rem; }
+            .summary-card { padding: 25px; }
+            .summary-title { font-size: 1.5rem; }
+            .summary-paragraph { font-size: 1.05rem; }
         }
     </style>
 </head>
@@ -340,13 +384,15 @@
             <i class="fas fa-comments"></i> 🗣️ Sunum Metni
         </button>
         <button class="tab-btn" onclick="switchTab('qa-tab', this)">
-            <i class="fas fa-question-circle"></i> ❓ Hoca Soruları (Q&A)
+            <i class="fas fa-question-circle"></i> ❓ Hoca Soruları
+        </button>
+        <button class="tab-btn" onclick="switchTab('summary-tab', this)">
+            <i class="fas fa-file-alt"></i> 📜 Poster Özeti
         </button>
     </div>
 
     <!-- ================= TAB 1: PRESENTATION ================= -->
     <div id="presentation-tab" class="tab-content active">
-        
         <!-- Speaker Selection -->
         <div id="speaker-selection">
             <h2>Kendi İsmini Seç & Odaklan</h2>
@@ -465,203 +511,86 @@
     <!-- ================= TAB 2: QUESTIONS & ANSWERS ================= -->
     <div id="qa-tab" class="tab-content">
         <div id="qa-container">
-            
             <div class="qa-card">
-                <div class="question">
-                    <i class="fas fa-comment-dots"></i>
-                    <div>
-                        <div class="lang-en">Teacher: Who would you like to travel to Erzurum with and why?</div>
-                        <div class="lang-tr">Hoca: Erzurum'a kiminle seyahat etmek istersin ve neden?</div>
-                    </div>
+                <div class="question"><i class="fas fa-comment-dots"></i><div><div class="lang-en">Teacher: Who would you like to travel to Erzurum with and why?</div><div class="lang-tr">Hoca: Erzurum'a kiminle seyahat etmek istersin ve neden?</div></div></div>
+                <div class="answer"><div class="lang-en">Student: I would love to go with my friends because enjoying the snow, skiing together, and eating Cağ Kebabı as a group would be extremely fun!</div><div class="lang-tr">Öğrenci: Arkadaşlarımla gitmeyi çok isterim çünkü karın tadını çıkarmak, birlikte kayak yapmak ve grupça Cağ Kebabı yemek son derece eğlenceli olurdu!</div></div>
+            </div>
+            <div class="qa-card">
+                <div class="question"><i class="fas fa-comment-dots"></i><div><div class="lang-en">Teacher: What are the main tourist attractions we should visit in Erzurum?</div><div class="lang-tr">Hoca: Erzurum'da ziyaret etmemiz gereken başlıca turistik yerler nerelerdir?</div></div></div>
+                <div class="answer"><div class="lang-en">Student: You should definitely visit Palandöken for skiing, Double Minaret Madrasa, Yakutiye Madrasa, Erzurum Castle, and the historical houses of Erzurum.</div><div class="lang-tr">Öğrenci: Kayak için Palandöken'i, Çifte Minareli Medrese'yi, Yakutiye Medresesi'ni, Erzurum Kalesi'ni ve tarihi Erzurum evlerini kesinlikle ziyaret etmelisiniz.</div></div>
+            </div>
+            <div class="qa-card">
+                <div class="question"><i class="fas fa-comment-dots"></i><div><div class="lang-en">Teacher: What is the best season to visit Erzurum?</div><div class="lang-tr">Hoca: Erzurum'u ziyaret etmek için en iyi mevsim hangisidir?</div></div></div>
+                <div class="answer"><div class="lang-en">Student: If you love winter sports, December to March is perfect. But if you want to explore historical sites comfortably, summer is great because the weather is cool and nice.</div><div class="lang-tr">Öğrenci: Kış sporlarını seviyorsanız, Aralık'tan Mart'a kadar olan dönem mükemmeldir. Ancak tarihi yerleri rahatça gezmek istiyorsanız, yaz mevsimi harikadır çünkü hava çok serin ve güzeldir.</div></div>
+            </div>
+            <div class="qa-card">
+                <div class="question"><i class="fas fa-comment-dots"></i><div><div class="lang-en">Teacher: How do tourists usually travel to Erzurum?</div><div class="lang-tr">Hoca: Turistler Erzurum'a genellikle nasıl seyahat eder?</div></div></div>
+                <div class="answer"><div class="lang-en">Student: Many people take flights, but the most nostalgic and popular way right now is taking the Eastern Express (Doğu Ekspresi) train for a magical snowy journey.</div><div class="lang-tr">Öğrenci: Birçok kişi uçak kullanıyor ama şu an en nostaljik ve popüler yol, büyülü karlı bir manzara için Doğu Ekspresi trenine binmektir.</div></div>
+            </div>
+            <div class="qa-card">
+                <div class="question"><i class="fas fa-comment-dots"></i><div><div class="lang-en">Teacher: What is Erzurum most famous for?</div><div class="lang-tr">Hoca: Erzurum en çok neyiyle ünlüdür?</div></div></div>
+                <div class="answer"><div class="lang-en">Student: It is famous for its cold weather, Palandöken Ski Resort, historical places like Double Minaret Madrasa, and delicious Cağ Kebabı.</div><div class="lang-tr">Öğrenci: Soğuk havası, Palandöken Kayak Merkezi, Çifte Minareli Medrese gibi tarihi yerleri ve lezzetli Cağ Kebabı ile ünlüdür.</div></div>
+            </div>
+            <div class="qa-card">
+                <div class="question"><i class="fas fa-comment-dots"></i><div><div class="lang-en">Teacher: What does the word "Dadaş" mean?</div><div class="lang-tr">Hoca: "Dadaş" kelimesi ne anlama gelir?</div></div></div>
+                <div class="answer"><div class="lang-en">Student: "Dadaş" is a traditional term used for the people of Erzurum. It means a brave man, a loyal brother, and a very generous host.</div><div class="lang-tr">Öğrenci: "Dadaş", Erzurum halkı için kullanılan geleneksel bir terimdir. Cesur adam, sadık bir kardeş ve çok cömert bir ev sahibi anlamına gelir.</div></div>
+            </div>
+            <div class="qa-card">
+                <div class="question"><i class="fas fa-comment-dots"></i><div><div class="lang-en">Teacher: Can you name a popular traditional dish from Erzurum?</div><div class="lang-tr">Hoca: Erzurum'dan popüler bir geleneksel yemek sayabilir misiniz?</div></div></div>
+                <div class="answer"><div class="lang-en">Student: Yes, Cağ Kebabı is the most popular. It is lamb meat marinated with onions and spices, then roasted horizontally. We also have Kadayıf Dolması as dessert.</div><div class="lang-tr">Öğrenci: Evet, en popüleri Cağ Kebabı'dır. Soğan ve baharatlarla marine edilip yatay olarak pişirilen kuzu etidir. Tatlı olarak da Kadayıf Dolması vardır.</div></div>
+            </div>
+            <div class="qa-card">
+                <div class="question"><i class="fas fa-comment-dots"></i><div><div class="lang-en">Teacher: Why is Palandöken Mountain important?</div><div class="lang-tr">Hoca: Palandöken Dağı neden önemlidir?</div></div></div>
+                <div class="answer"><div class="lang-en">Student: Because it is one of the best ski resorts in the world. It has very long and steep tracks. It even hosted the 2011 Winter Universiade.</div><div class="lang-tr">Öğrenci: Çünkü dünyanın en iyi kayak merkezlerinden biridir. Çok uzun ve dik pistleri vardır. Hatta 2011 Kış Üniversite Oyunları'na ev sahipliği yapmıştır.</div></div>
+            </div>
+            <div class="qa-card">
+                <div class="question"><i class="fas fa-comment-dots"></i><div><div class="lang-en">Teacher: Is it hard to learn skiing in Palandöken?</div><div class="lang-tr">Hoca: Palandöken'de kayak öğrenmek zor mu?</div></div></div>
+                <div class="answer"><div class="lang-en">Student: Not at all! Palandöken has different tracks for everyone. There are very easy tracks for beginners and extremely steep tracks for professionals.</div><div class="lang-tr">Öğrenci: Kesinlikle hayır! Palandöken'in herkes için farklı pistleri var. Yeni başlayanlar için çok kolay pistler ve profesyoneller için son derece dik pistler bulunur.</div></div>
+            </div>
+            <div class="qa-card">
+                <div class="question"><i class="fas fa-comment-dots"></i><div><div class="lang-en">Teacher: What kind of souvenirs can tourists buy from there?</div><div class="lang-tr">Hoca: Turistler oradan ne tür hediyelik eşyalar alabilir?</div></div></div>
+                <div class="answer"><div class="lang-en">Student: The best souvenir is jewelry made of Oltu Stone. You can also buy local products like civil cheese or traditional handmade copper items.</div><div class="lang-tr">Öğrenci: En iyi hediyelik eşya Oltu Taşı'ndan yapılan takılardır. Ayrıca civil peyniri gibi yöresel ürünler veya geleneksel el yapımı bakır eşyalar da alabilirsiniz.</div></div>
+            </div>
+            <div class="qa-card">
+                <div class="question"><i class="fas fa-comment-dots"></i><div><div class="lang-en">Teacher: What is the historical importance of Erzurum for Turkey?</div><div class="lang-tr">Hoca: Erzurum'un Türkiye için tarihi önemi nedir?</div></div></div>
+                <div class="answer"><div class="lang-en">Student: Erzurum hosted the Erzurum Congress in 1919 led by Mustafa Kemal Atatürk. It is a very important step in the foundation of the Turkish Republic.</div><div class="lang-tr">Öğrenci: Erzurum, 1919 yılında Mustafa Kemal Atatürk önderliğindeki Erzurum Kongresi'ne ev sahipliği yapmıştır. Türkiye Cumhuriyeti'nin kuruluşunda çok önemli bir adımdır.</div></div>
+            </div>
+            <div class="qa-card">
+                <div class="question"><i class="fas fa-comment-dots"></i><div><div class="lang-en">Teacher: How would you describe the climate of Erzurum?</div><div class="lang-tr">Hoca: Erzurum'un iklimini nasıl tarif edersin?</div></div></div>
+                <div class="answer"><div class="lang-en">Student: Erzurum has a strict continental climate. Winters are very long, snowy, and freezing cold. Summers are short and cool.</div><div class="lang-tr">Öğrenci: Erzurum sert bir karasal iklime sahiptir. Kışlar çok uzun, karlı ve dondurucu soğuktur. Yazlar ise kısa ve serindir.</div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= TAB 3: POSTER SUMMARY ================= -->
+    <div id="summary-tab" class="tab-content">
+        <div id="summary-container">
+            <div class="summary-card">
+                <div class="summary-title">
+                    <div class="lang-en">Erzurum: The Heart of Eastern Anatolia</div>
+                    <div class="lang-tr">Erzurum: Doğu Anadolu'nun Kalbi</div>
                 </div>
-                <div class="answer">
-                    <div class="lang-en">Student: I would love to go with my friends because enjoying the snow, skiing together, and eating Cağ Kebabı as a group would be extremely fun!</div>
-                    <div class="lang-tr">Öğrenci: Arkadaşlarımla gitmeyi çok isterim çünkü karın tadını çıkarmak, birlikte kayak yapmak ve grupça Cağ Kebabı yemek son derece eğlenceli olurdu!</div>
+                
+                <div class="summary-paragraph">
+                    <div class="lang-en">Erzurum is a city where freezing winters are melted by the warmth of its people. Located at the high altitudes of Eastern Anatolia, it offers a magical atmosphere blending centuries of history with breathtaking snowy landscapes. When you step into this city, you immediately feel the powerful and deeply rooted Eastern culture surrounding you.</div>
+                    <div class="lang-tr">Erzurum, dondurucu kışların insanlarının sıcaklığıyla eridiği bir şehirdir. Doğu Anadolu'nun yüksek rakımlarında yer alan şehir, yüzyıllık tarihi nefes kesici karlı manzaralarla harmanlayan büyülü bir atmosfer sunar. Bu şehre adım attığınızda, köklü ve güçlü Doğu kültürünün sizi çepeçevre sardığını anında hissedersiniz.</div>
+                </div>
+
+                <div class="summary-paragraph">
+                    <div class="lang-en">The core of Erzurum's culture is the "Dadaş" identity. A Dadaş is not just a person; it is a symbol of bravery, honesty, brotherhood, and unmatched hospitality. When you visit, you don't just feel like a tourist; you feel like an honored guest in a grand house.</div>
+                    <div class="lang-tr">Erzurum kültürünün özü "Dadaş" kimliğidir. Bir Dadaş sadece bir insan değil; cesaretin, dürüstlüğün, kardeşliğin ve eşsiz misafirperverliğin sembolüdür. Burayı ziyaret ettiğinizde sadece bir turist gibi değil, büyük bir evin onurlu bir misafiri gibi hissedersiniz.</div>
+                </div>
+
+                <div class="summary-paragraph">
+                    <div class="lang-en">The city itself is like a giant, open-air living museum. The magnificent Double Minaret Madrasa, Yakutiye Madrasa, and the historical Erzurum Castle stand as proud guardians of the past. Beyond history, for nature and sports lovers, the mighty Palandöken Mountain is a world-class skiing paradise with its famous powder snow and endless tracks.</div>
+                    <div class="lang-tr">Şehrin kendisi devasa bir açık hava müzesi gibidir. Muazzam Çifte Minareli Medrese, Yakutiye Medresesi ve tarihi Erzurum Kalesi, geçmişin gururlu muhafızları olarak ayakta durur. Tarihin ötesinde, doğa ve spor tutkunları için ulu Palandöken Dağı, meşhur toz karı ve uçsuz bucaksız pistleriyle dünya standartlarında bir kayak cennetidir.</div>
+                </div>
+
+                <div class="summary-paragraph">
+                    <div class="lang-en">Finally, no visit to Erzurum is complete without tasting its legendary cuisine. The famous Cağ Kebabı, marinated and cooked horizontally over a wood fire, is an absolute masterpiece for meat lovers. This delicious feast is always perfectly concluded with a crispy, sweet, and walnut-stuffed Kadayıf Dolması.</div>
+                    <div class="lang-tr">Son olarak, şehrin efsanevi mutfağını tatmadan hiçbir Erzurum ziyareti tamamlanmış sayılmaz. Odun ateşinde yatay olarak pişirilen meşhur Cağ Kebabı, et severler için mutlak bir şaheserdir. Bu lezzetli ziyafet her zaman çıtır, tatlı ve cevizli bir Kadayıf Dolması ile kusursuz bir şekilde sonlandırılır.</div>
                 </div>
             </div>
-
-            <div class="qa-card">
-                <div class="question">
-                    <i class="fas fa-comment-dots"></i>
-                    <div>
-                        <div class="lang-en">Teacher: What are the main tourist attractions we should visit in Erzurum?</div>
-                        <div class="lang-tr">Hoca: Erzurum'da ziyaret etmemiz gereken başlıca turistik yerler nerelerdir?</div>
-                    </div>
-                </div>
-                <div class="answer">
-                    <div class="lang-en">Student: You should definitely visit Palandöken for skiing, Double Minaret Madrasa, Yakutiye Madrasa, Erzurum Castle, and the historical houses of Erzurum.</div>
-                    <div class="lang-tr">Öğrenci: Kayak için Palandöken'i, Çifte Minareli Medrese'yi, Yakutiye Medresesi'ni, Erzurum Kalesi'ni ve tarihi Erzurum evlerini kesinlikle ziyaret etmelisiniz.</div>
-                </div>
-            </div>
-
-            <div class="qa-card">
-                <div class="question">
-                    <i class="fas fa-comment-dots"></i>
-                    <div>
-                        <div class="lang-en">Teacher: What is the best season to visit Erzurum?</div>
-                        <div class="lang-tr">Hoca: Erzurum'u ziyaret etmek için en iyi mevsim hangisidir?</div>
-                    </div>
-                </div>
-                <div class="answer">
-                    <div class="lang-en">Student: If you love winter sports, December to March is perfect. But if you want to explore historical sites comfortably, summer is great because the weather is cool and nice.</div>
-                    <div class="lang-tr">Öğrenci: Kış sporlarını seviyorsanız, Aralık'tan Mart'a kadar olan dönem mükemmeldir. Ancak tarihi yerleri rahatça gezmek istiyorsanız, yaz mevsimi harikadır çünkü hava çok serin ve güzeldir.</div>
-                </div>
-            </div>
-
-            <div class="qa-card">
-                <div class="question">
-                    <i class="fas fa-comment-dots"></i>
-                    <div>
-                        <div class="lang-en">Teacher: How do tourists usually travel to Erzurum?</div>
-                        <div class="lang-tr">Hoca: Turistler Erzurum'a genellikle nasıl seyahat eder?</div>
-                    </div>
-                </div>
-                <div class="answer">
-                    <div class="lang-en">Student: Many people take flights, but the most nostalgic and popular way right now is taking the Eastern Express (Doğu Ekspresi) train for a magical snowy journey.</div>
-                    <div class="lang-tr">Öğrenci: Birçok kişi uçak kullanıyor ama şu an en nostaljik ve popüler yol, büyülü karlı bir manzara için Doğu Ekspresi trenine binmektir.</div>
-                </div>
-            </div>
-
-            <div class="qa-card">
-                <div class="question">
-                    <i class="fas fa-comment-dots"></i>
-                    <div>
-                        <div class="lang-en">Teacher: What is Erzurum most famous for?</div>
-                        <div class="lang-tr">Hoca: Erzurum en çok neyiyle ünlüdür?</div>
-                    </div>
-                </div>
-                <div class="answer">
-                    <div class="lang-en">Student: It is famous for its cold weather, Palandöken Ski Resort, historical places like Double Minaret Madrasa, and delicious Cağ Kebabı.</div>
-                    <div class="lang-tr">Öğrenci: Soğuk havası, Palandöken Kayak Merkezi, Çifte Minareli Medrese gibi tarihi yerleri ve lezzetli Cağ Kebabı ile ünlüdür.</div>
-                </div>
-            </div>
-
-            <div class="qa-card">
-                <div class="question">
-                    <i class="fas fa-comment-dots"></i>
-                    <div>
-                        <div class="lang-en">Teacher: What does the word "Dadaş" mean?</div>
-                        <div class="lang-tr">Hoca: "Dadaş" kelimesi ne anlama gelir?</div>
-                    </div>
-                </div>
-                <div class="answer">
-                    <div class="lang-en">Student: "Dadaş" is a traditional term used for the people of Erzurum. It means a brave man, a loyal brother, and a very generous host.</div>
-                    <div class="lang-tr">Öğrenci: "Dadaş", Erzurum halkı için kullanılan geleneksel bir terimdir. Cesur adam, sadık bir kardeş ve çok cömert bir ev sahibi anlamına gelir.</div>
-                </div>
-            </div>
-
-            <div class="qa-card">
-                <div class="question">
-                    <i class="fas fa-comment-dots"></i>
-                    <div>
-                        <div class="lang-en">Teacher: Can you name a popular traditional dish from Erzurum?</div>
-                        <div class="lang-tr">Hoca: Erzurum'dan popüler bir geleneksel yemek sayabilir misiniz?</div>
-                    </div>
-                </div>
-                <div class="answer">
-                    <div class="lang-en">Student: Yes, Cağ Kebabı is the most popular. It is lamb meat marinated with onions and spices, then roasted horizontally. We also have Kadayıf Dolması as dessert.</div>
-                    <div class="lang-tr">Öğrenci: Evet, en popüleri Cağ Kebabı'dır. Soğan ve baharatlarla marine edilip yatay olarak pişirilen kuzu etidir. Tatlı olarak da Kadayıf Dolması vardır.</div>
-                </div>
-            </div>
-
-            <div class="qa-card">
-                <div class="question">
-                    <i class="fas fa-comment-dots"></i>
-                    <div>
-                        <div class="lang-en">Teacher: Why is Palandöken Mountain important?</div>
-                        <div class="lang-tr">Hoca: Palandöken Dağı neden önemlidir?</div>
-                    </div>
-                </div>
-                <div class="answer">
-                    <div class="lang-en">Student: Because it is one of the best ski resorts in the world. It has very long and steep tracks. It even hosted the 2011 Winter Universiade.</div>
-                    <div class="lang-tr">Öğrenci: Çünkü dünyanın en iyi kayak merkezlerinden biridir. Çok uzun ve dik pistleri vardır. Hatta 2011 Kış Üniversite Oyunları'na ev sahipliği yapmıştır.</div>
-                </div>
-            </div>
-
-            <div class="qa-card">
-                <div class="question">
-                    <i class="fas fa-comment-dots"></i>
-                    <div>
-                        <div class="lang-en">Teacher: Is it hard to learn skiing in Palandöken?</div>
-                        <div class="lang-tr">Hoca: Palandöken'de kayak öğrenmek zor mu?</div>
-                    </div>
-                </div>
-                <div class="answer">
-                    <div class="lang-en">Student: Not at all! Palandöken has different tracks for everyone. There are very easy tracks for beginners and extremely steep tracks for professionals.</div>
-                    <div class="lang-tr">Öğrenci: Kesinlikle hayır! Palandöken'in herkes için farklı pistleri var. Yeni başlayanlar için çok kolay pistler ve profesyoneller için son derece dik pistler bulunur.</div>
-                </div>
-            </div>
-
-            <div class="qa-card">
-                <div class="question">
-                    <i class="fas fa-comment-dots"></i>
-                    <div>
-                        <div class="lang-en">Teacher: What kind of souvenirs can tourists buy from there?</div>
-                        <div class="lang-tr">Hoca: Turistler oradan ne tür hediyelik eşyalar alabilir?</div>
-                    </div>
-                </div>
-                <div class="answer">
-                    <div class="lang-en">Student: The best souvenir is jewelry made of Oltu Stone. You can also buy local products like civil cheese or traditional handmade copper items.</div>
-                    <div class="lang-tr">Öğrenci: En iyi hediyelik eşya Oltu Taşı'ndan yapılan takılardır. Ayrıca civil peyniri gibi yöresel ürünler veya geleneksel el yapımı bakır eşyalar da alabilirsiniz.</div>
-                </div>
-            </div>
-
-            <div class="qa-card">
-                <div class="question">
-                    <i class="fas fa-comment-dots"></i>
-                    <div>
-                        <div class="lang-en">Teacher: What is the historical importance of Erzurum for Turkey?</div>
-                        <div class="lang-tr">Hoca: Erzurum'un Türkiye için tarihi önemi nedir?</div>
-                    </div>
-                </div>
-                <div class="answer">
-                    <div class="lang-en">Student: Erzurum hosted the Erzurum Congress in 1919 led by Mustafa Kemal Atatürk. It is a very important step in the foundation of the Turkish Republic.</div>
-                    <div class="lang-tr">Öğrenci: Erzurum, 1919 yılında Mustafa Kemal Atatürk önderliğindeki Erzurum Kongresi'ne ev sahipliği yapmıştır. Türkiye Cumhuriyeti'nin kuruluşunda çok önemli bir adımdır.</div>
-                </div>
-            </div>
-
-            <div class="qa-card">
-                <div class="question">
-                    <i class="fas fa-comment-dots"></i>
-                    <div>
-                        <div class="lang-en">Teacher: How would you describe the climate of Erzurum?</div>
-                        <div class="lang-tr">Hoca: Erzurum'un iklimini nasıl tarif edersin?</div>
-                    </div>
-                </div>
-                <div class="answer">
-                    <div class="lang-en">Student: Erzurum has a strict continental climate. Winters are very long, snowy, and freezing cold. Summers are short and cool.</div>
-                    <div class="lang-tr">Öğrenci: Erzurum sert bir karasal iklime sahiptir. Kışlar çok uzun, karlı ve dondurucu soğuktur. Yazlar ise kısa ve serindir.</div>
-                </div>
-            </div>
-
-            <div class="qa-card">
-                <div class="question">
-                    <i class="fas fa-comment-dots"></i>
-                    <div>
-                        <div class="lang-en">Teacher: What is the most iconic historical building in Erzurum?</div>
-                        <div class="lang-tr">Hoca: Erzurum'daki en ikonik tarihi yapı hangisidir?</div>
-                    </div>
-                </div>
-                <div class="answer">
-                    <div class="lang-en">Student: The most iconic building is the Double Minaret Madrasa (Çifte Minareli Medrese). It is a beautiful masterpiece from the Seljuk period.</div>
-                    <div class="lang-tr">Öğrenci: En ikonik yapı Çifte Minareli Medrese'dir. Selçuklu döneminden kalma güzel bir şaheserdir.</div>
-                </div>
-            </div>
-
-            <div class="qa-card">
-                <div class="question">
-                    <i class="fas fa-comment-dots"></i>
-                    <div>
-                        <div class="lang-en">Teacher: Why did your group choose Erzurum for this presentation?</div>
-                        <div class="lang-tr">Hoca: Grubunuz bu sunum için neden Erzurum'u seçti?</div>
-                    </div>
-                </div>
-                <div class="answer">
-                    <div class="lang-en">Student: Because we believe Erzurum has a perfect combination of rich history, unique culture, and amazing winter tourism that deserves to be known.</div>
-                    <div class="lang-tr">Öğrenci: Çünkü Erzurum'un; bilinmeyi hak eden zengin tarih, eşsiz kültür ve harika kış turizminin mükemmel bir birleşimine sahip olduğuna inanıyoruz.</div>
-                </div>
-            </div>
-
         </div>
     </div>
 
