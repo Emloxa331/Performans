@@ -16,6 +16,7 @@
             --accent-glow: rgba(59, 130, 246, 0.5);
             --success: #10b981;
             --success-glow: rgba(16, 185, 129, 0.5);
+            --warning: #f59e0b;
             --border-color: rgba(255, 255, 255, 0.08);
         }
 
@@ -43,7 +44,6 @@
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--border-color);
-            transition: all 0.3s ease;
         }
 
         .branding { 
@@ -56,7 +56,6 @@
             gap: 6px;
         }
 
-        /* Renk efekti sadece yazıya uygulanır, emoji etkilenmez */
         .brand-text {
             background: linear-gradient(90deg, #fff, var(--accent));
             -webkit-background-clip: text;
@@ -84,7 +83,7 @@
 
         /* --- Hero Section --- */
         header.hero {
-            padding: 140px 20px 60px 20px;
+            padding: 120px 20px 30px 20px;
             text-align: center;
             max-width: 800px;
             margin: 0 auto;
@@ -92,83 +91,116 @@
         
         .hero h1 { 
             font-family: 'Poppins', sans-serif;
-            font-size: 4rem; 
+            font-size: 3.5rem; 
             font-weight: 800; 
             letter-spacing: 4px;
             text-transform: uppercase;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             text-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
         
-        .hero p { font-size: 1.2rem; color: var(--text-muted); line-height: 1.6; }
+        .hero p { font-size: 1.1rem; color: var(--text-muted); line-height: 1.6; }
 
-        /* --- Premium Speaker Selection Panel --- */
+        /* --- Tabs Navigation --- */
+        .tab-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            padding: 0 20px;
+        }
+
+        .tab-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tab-btn:hover { color: var(--text-main); border-color: rgba(255,255,255,0.2); }
+        
+        .tab-btn.active {
+            background: var(--accent);
+            color: #000;
+            border-color: var(--accent);
+            box-shadow: 0 8px 20px var(--accent-glow);
+        }
+
+        .tab-content { display: none; animation: fadeIn 0.4s ease; }
+        .tab-content.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Panel 1: Presentation (Speaker Selection & Script) --- */
         #speaker-selection {
             max-width: 900px;
-            margin: 0 auto 50px auto;
+            margin: 0 auto 40px auto;
             background: var(--bg-card);
             border: 1px solid var(--border-color);
             border-radius: 24px;
             padding: 30px;
             text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-            backdrop-filter: blur(10px);
             width: 90%;
         }
 
         #speaker-selection h2 {
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: var(--text-muted);
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             text-transform: uppercase;
             letter-spacing: 2px;
-            font-weight: 600;
         }
 
-        /* Mobile Responsive Grid for Buttons */
         .speaker-btns {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-            gap: 12px;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
         }
 
         .speaker-btn {
             background: rgba(255,255,255,0.03);
             border: 1px solid var(--border-color);
             color: var(--text-main);
-            padding: 12px 10px;
+            padding: 10px 5px;
             border-radius: 12px;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s;
         }
 
-        .speaker-btn:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.2); }
-        
         .speaker-btn.active {
             background: var(--success);
             border-color: var(--success);
             color: #000;
-            box-shadow: 0 8px 20px var(--success-glow);
-            transform: translateY(-3px);
+            box-shadow: 0 5px 15px var(--success-glow);
         }
 
         #stats-badge {
             display: inline-block;
-            margin-top: 25px;
+            margin-top: 20px;
             background: rgba(16, 185, 129, 0.1);
             color: var(--success);
             border: 1px solid var(--success-glow);
-            padding: 8px 24px;
+            padding: 8px 20px;
             border-radius: 20px;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             opacity: 0;
             transition: opacity 0.4s ease;
         }
 
-        /* --- Dialog Script Layout (Modern Chat/Script Style) --- */
         #script-container {
             max-width: 800px;
             margin: 0 auto 100px auto;
@@ -180,20 +212,13 @@
 
         .script-line {
             background: rgba(255,255,255,0.02);
-            border: 1px solid transparent;
             border-left: 4px solid var(--border-color);
             border-radius: 0 12px 12px 0;
             padding: 20px;
             font-size: 1.15rem;
-            line-height: 1.7;
+            line-height: 1.6;
             transition: all 0.4s ease;
-            opacity: 0;
-            transform: translateY(20px);
-            position: relative;
-            overflow: hidden;
         }
-
-        .script-line.visible { opacity: 1; transform: translateY(0); }
 
         .speaker-name {
             display: block;
@@ -206,56 +231,76 @@
             margin-bottom: 8px;
         }
 
-        /* Highlighting & Focus Logic */
-        .script-line.dimmed {
-            opacity: 0.3;
-            filter: blur(2px) grayscale(50%);
-            transform: scale(0.98);
-        }
-
+        .script-line.dimmed { opacity: 0.3; filter: blur(2px) grayscale(50%); transform: scale(0.98); }
         .script-line.highlighted {
             background: linear-gradient(90deg, rgba(16, 185, 129, 0.08) 0%, transparent 100%);
             border-left-color: var(--success);
-            border-top: 1px solid rgba(16, 185, 129, 0.1);
-            border-bottom: 1px solid rgba(16, 185, 129, 0.1);
-            border-right: 1px solid rgba(16, 185, 129, 0.1);
-            transform: scale(1.03) translateX(10px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            z-index: 10;
+            transform: scale(1.02) translateX(10px);
         }
-
         .script-line.highlighted .speaker-name { color: var(--success); }
 
+        /* --- Panel 2: Q&A Section --- */
+        #qa-container {
+            max-width: 800px;
+            margin: 0 auto 100px auto;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .qa-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .qa-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 4px; height: 100%;
+            background: var(--warning);
+        }
+
+        .question {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1.15rem;
+            color: var(--warning);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .answer {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: var(--text-main);
+            padding-left: 30px;
+        }
+
         /* Language Logic */
-        .lang-tr { display: none; color: var(--text-muted); font-size: 1rem; margin-top: 8px; border-top: 1px dashed rgba(255,255,255,0.1); padding-top: 8px; }
+        .lang-tr { display: none; color: var(--text-muted); font-size: 0.95rem; margin-top: 8px; border-top: 1px dashed rgba(255,255,255,0.1); padding-top: 8px; }
         body.tr-active .lang-en { display: none; }
-        body.tr-active .lang-tr { display: block; color: var(--text-main); font-size: 1.15rem; border: none; padding: 0; margin: 0; }
+        body.tr-active .lang-tr { display: block; color: var(--text-main); font-size: 1.05rem; border: none; padding: 0; margin: 0; }
 
-        audio { display: none; }
-
-        /* --- MOBILE RESPONSIVE TWEAKS --- */
         @media (max-width: 768px) {
             #top-bar { padding: 12px 15px; }
             .branding { font-size: 1.1rem; }
-            .global-btns button { padding: 6px 12px; font-size: 0.8rem; }
             .global-btns button span { display: none; }
-            
-            header.hero { padding-top: 100px; padding-bottom: 40px; }
-            .hero h1 { font-size: 2.8rem; letter-spacing: 2px; }
-            .hero p { font-size: 1rem; }
-
-            #speaker-selection { padding: 20px 15px; border-radius: 16px; width: 95%; }
-            .speaker-btns { grid-template-columns: repeat(2, 1fr); gap: 8px; }
-            .speaker-btn { padding: 10px 5px; font-size: 0.85rem; }
+            header.hero { padding-top: 100px; }
+            .hero h1 { font-size: 2.5rem; }
+            .tab-container { flex-direction: column; padding: 0 20px; }
+            .tab-btn { justify-content: center; padding: 10px; }
+            .speaker-btns { grid-template-columns: repeat(2, 1fr); }
             .speaker-btn[onclick*="'all'"] { grid-column: span 2; }
-
-            .script-line { padding: 15px; font-size: 1.05rem; }
-        }
-
-        @media (max-width: 400px) {
-            .hero h1 { font-size: 2.2rem; }
-            .speaker-btns { grid-template-columns: 1fr; }
-            .speaker-btn[onclick*="'all'"] { grid-column: span 1; }
+            .script-line, .answer { font-size: 1rem; }
+            .question { font-size: 1.05rem; }
         }
     </style>
 </head>
@@ -266,7 +311,7 @@
         <source src="song2.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- Top Navigation Bar -->
+    <!-- Top Navigation -->
     <div id="top-bar">
         <div class="branding">
             <span class="brand-text">BABALAR</span>
@@ -289,156 +334,349 @@
         <p class="lang-tr">Tarihin, Kışın ve Kültürün Zirvesi</p>
     </header>
 
-    <!-- Mobile-Optimized Speaker Selection -->
-    <div id="speaker-selection">
-        <h2>Kendi İsmini Seç & Odaklan</h2>
-        <div class="speaker-btns">
-            <button class="speaker-btn active" onclick="highlightSpeaker('all', this)">Tüm Metin</button>
-            <button class="speaker-btn" onclick="highlightSpeaker('Mecit', this)">Mecit Taha</button>
-            <button class="speaker-btn" onclick="highlightSpeaker('Melih', this)">Melih Furkan</button>
-            <button class="speaker-btn" onclick="highlightSpeaker('Emrullah', this)">Emrullah</button>
-            <button class="speaker-btn" onclick="highlightSpeaker('Sait', this)">Muhammed Sait</button>
-            <button class="speaker-btn" onclick="highlightSpeaker('Yigit', this)">Muhammed Yiğit</button>
-            <button class="speaker-btn" onclick="highlightSpeaker('Sefa', this)">Muhammed Sefa</button>
-        </div>
-        <div id="stats-badge">Seçim Bekleniyor...</div>
+    <!-- TABS -->
+    <div class="tab-container">
+        <button class="tab-btn active" onclick="switchTab('presentation-tab', this)">
+            <i class="fas fa-comments"></i> 🗣️ Sunum Metni
+        </button>
+        <button class="tab-btn" onclick="switchTab('qa-tab', this)">
+            <i class="fas fa-question-circle"></i> ❓ Hoca Soruları (Q&A)
+        </button>
     </div>
 
-    <!-- Dialog Script Container -->
-    <div id="script-container">
-
-        <!-- ROUND 1 -->
-        <div class="script-line" data-speaker="Mecit">
-            <span class="speaker-name">Mecit</span>
-            <div class="speech lang-en">Hello everyone and welcome to our presentation! Today we are taking you to the icy peak of Turkey, Erzurum.</div>
-            <div class="speech lang-tr">Herkese merhaba ve sunumumuza hoş geldiniz! Bugün sizi Türkiye'nin buzlu zirvesi Erzurum'a götürüyoruz.</div>
+    <!-- ================= TAB 1: PRESENTATION ================= -->
+    <div id="presentation-tab" class="tab-content active">
+        
+        <!-- Speaker Selection -->
+        <div id="speaker-selection">
+            <h2>Kendi İsmini Seç & Odaklan</h2>
+            <div class="speaker-btns">
+                <button class="speaker-btn active" onclick="highlightSpeaker('all', this)">Tüm Metin</button>
+                <button class="speaker-btn" onclick="highlightSpeaker('Mecit', this)">Mecit Taha</button>
+                <button class="speaker-btn" onclick="highlightSpeaker('Melih', this)">Melih Furkan</button>
+                <button class="speaker-btn" onclick="highlightSpeaker('Emrullah', this)">Emrullah</button>
+                <button class="speaker-btn" onclick="highlightSpeaker('Sait', this)">Muhammed Sait</button>
+                <button class="speaker-btn" onclick="highlightSpeaker('Yigit', this)">Muhammed Yiğit</button>
+                <button class="speaker-btn" onclick="highlightSpeaker('Sefa', this)">Muhammed Sefa</button>
+            </div>
+            <div id="stats-badge">Seçim Bekleniyor...</div>
         </div>
 
-        <div class="script-line" data-speaker="Melih">
-            <span class="speaker-name">Melih</span>
-            <div class="speech lang-en">It is known as the pearl of Eastern Anatolia. A magical city where history and winter perfectly come together.</div>
-            <div class="speech lang-tr">Doğu Anadolu'nun incisi olarak bilinir. Tarih ve kışın kusursuzca bir araya geldiği büyülü bir şehir.</div>
-        </div>
+        <!-- Script Container -->
+        <div id="script-container">
+            <!-- ROUND 1 -->
+            <div class="script-line" data-speaker="Mecit">
+                <span class="speaker-name">Mecit</span>
+                <div class="speech lang-en">Hello everyone and welcome to our presentation! Today we are taking you to the icy peak of Turkey, Erzurum.</div>
+                <div class="speech lang-tr">Herkese merhaba ve sunumumuza hoş geldiniz! Bugün sizi Türkiye'nin buzlu zirvesi Erzurum'a götürüyoruz.</div>
+            </div>
+            <div class="script-line" data-speaker="Melih">
+                <span class="speaker-name">Melih</span>
+                <div class="speech lang-en">It is known as the pearl of Eastern Anatolia. A magical city where history and winter perfectly come together.</div>
+                <div class="speech lang-tr">Doğu Anadolu'nun incisi olarak bilinir. Tarih ve kışın kusursuzca bir araya geldiği büyülü bir şehir.</div>
+            </div>
+            <div class="script-line" data-speaker="Emrullah">
+                <span class="speaker-name">Emrullah</span>
+                <div class="speech lang-en">When you say Erzurum, the first thing is snow! Palandöken Mountain is a pure paradise for skiers.</div>
+                <div class="speech lang-tr">Erzurum deyince akla ilk kar gelir! Palandöken Dağı kayakçılar için tam bir cennettir.</div>
+            </div>
+            <div class="script-line" data-speaker="Sait">
+                <span class="speaker-name">Sait</span>
+                <div class="speech lang-en">Exactly! It has some of the longest and steepest ski tracks in the world. The snow quality is just amazing.</div>
+                <div class="speech lang-tr">Kesinlikle! Dünyanın en uzun ve en dik kayak pistlerinden bazılarına sahip. Kar kalitesi tek kelimeyle inanılmaz.</div>
+            </div>
+            <div class="script-line" data-speaker="Yigit">
+                <span class="speaker-name">Yiğit</span>
+                <div class="speech lang-en">But it's not just about skiing. Erzurum is like a giant open-air historical museum.</div>
+                <div class="speech lang-tr">Ama sadece kayaktan ibaret değil. Erzurum devasa bir açık hava tarih müzesi gibidir.</div>
+            </div>
+            <div class="script-line" data-speaker="Sefa">
+                <span class="speaker-name">Sefa</span>
+                <div class="speech lang-en">Yes! The Double Minaret Madrasa is our iconic symbol. It's a true masterpiece from the Seljuk Empire.</div>
+                <div class="speech lang-tr">Evet! Çifte Minareli Medrese bizim ikonik sembolümüzdür. Selçuklu İmparatorluğu'ndan kalma gerçek bir şaheser.</div>
+            </div>
 
-        <div class="script-line" data-speaker="Emrullah">
-            <span class="speaker-name">Emrullah</span>
-            <div class="speech lang-en">When you say Erzurum, the first thing is snow! Palandöken Mountain is a pure paradise for skiers.</div>
-            <div class="speech lang-tr">Erzurum deyince akla ilk kar gelir! Palandöken Dağı kayakçılar için tam bir cennettir.</div>
-        </div>
+            <!-- ROUND 2 -->
+            <div class="script-line" data-speaker="Mecit">
+                <span class="speaker-name">Mecit</span>
+                <div class="speech lang-en">You can also visit the historic Erzurum Castle and Yakutiye Madrasa. They have watched over the city for centuries.</div>
+                <div class="speech lang-tr">Ayrıca tarihi Erzurum Kalesi'ni ve Yakutiye Medresesi'ni de ziyaret edebilirsiniz. Yüzyıllardır şehri gözetliyorlar.</div>
+            </div>
+            <div class="script-line" data-speaker="Melih">
+                <span class="speaker-name">Melih</span>
+                <div class="speech lang-en">What about the local culture? The brave people of Erzurum are traditionally called "Dadaş".</div>
+                <div class="speech lang-tr">Peki ya yerel kültür? Erzurum'un cesur insanlarına geleneksel olarak "Dadaş" denir.</div>
+            </div>
+            <div class="script-line" data-speaker="Emrullah">
+                <span class="speaker-name">Emrullah</span>
+                <div class="speech lang-en">Dadaş means brother, brave man, and a generous host. We welcome every guest with open arms here.</div>
+                <div class="speech lang-tr">Dadaş; kardeş, yiğit adam ve cömert ev sahibi demektir. Burada her misafiri kollarımızı açarak karşılarız.</div>
+            </div>
+            <div class="script-line" data-speaker="Sait">
+                <span class="speaker-name">Sait</span>
+                <div class="speech lang-en">If you want a special souvenir, you must buy Oltu Stone. It's a beautiful black stone used for amazing rings and rosaries.</div>
+                <div class="speech lang-tr">Özel bir hatıra istiyorsanız mutlaka Oltu Taşı almalısınız. Harika yüzükler ve tespihler için kullanılan güzel siyah bir taştır.</div>
+            </div>
+            <div class="script-line" data-speaker="Yigit">
+                <span class="speaker-name">Yiğit</span>
+                <div class="speech lang-en">Now, my favorite part: Food! You simply cannot leave Erzurum without eating the famous Cağ Kebabı.</div>
+                <div class="speech lang-tr">Şimdi en sevdiğim kısım: Yemek! Meşhur Cağ Kebabı'nı yemeden Erzurum'dan ayrılamazsınız.</div>
+            </div>
+            <div class="script-line" data-speaker="Sefa">
+                <span class="speaker-name">Sefa</span>
+                <div class="speech lang-en">Oh, it is legendary! Delicious lamb meat roasted horizontally over a wood fire. It is simply mouth-watering.</div>
+                <div class="speech lang-tr">Ah, o efsanedir! Odun ateşinde yatay olarak kızartılmış leziz kuzu eti. Kelimenin tam anlamıyla ağız sulandırıyor.</div>
+            </div>
 
-        <div class="script-line" data-speaker="Sait">
-            <span class="speaker-name">Sait</span>
-            <div class="speech lang-en">Exactly! It has some of the longest and steepest ski tracks in the world. The snow quality is just amazing.</div>
-            <div class="speech lang-tr">Kesinlikle! Dünyanın en uzun ve en dik kayak pistlerinden bazılarına sahip. Kar kalitesi tek kelimeyle inanılmaz.</div>
+            <!-- ROUND 3 -->
+            <div class="script-line" data-speaker="Mecit">
+                <span class="speaker-name">Mecit</span>
+                <div class="speech lang-en">And for dessert? Kadayıf Dolması! It's a crispy, sweet pastry stuffed with crushed walnuts.</div>
+                <div class="speech lang-tr">Peki ya tatlı? Kadayıf Dolması! Dövülmüş cevizle doldurulmuş çıtır, tatlı bir hamur işidir.</div>
+            </div>
+            <div class="script-line" data-speaker="Melih">
+                <span class="speaker-name">Melih</span>
+                <div class="speech lang-en">Don't forget the Ayran Aşı soup and Su Böreği for your breakfast. Our local cuisine is incredibly rich.</div>
+                <div class="speech lang-tr">Kahvaltınız için Ayran Aşı çorbasını ve Su Böreği'ni de unutmayın. Yöresel mutfağımız inanılmaz derecede zengindir.</div>
+            </div>
+            <div class="script-line" data-speaker="Emrullah">
+                <span class="speaker-name">Emrullah</span>
+                <div class="speech lang-en">To sum everything up, Erzurum gives you very cold winters but the warmest and most sincere smiles.</div>
+                <div class="speech lang-tr">Her şeyi özetlemek gerekirse; Erzurum size çok soğuk kışlar ama en sıcak ve en samimi gülümsemeleri sunar.</div>
+            </div>
+            <div class="script-line" data-speaker="Sait">
+                <span class="speaker-name">Sait</span>
+                <div class="speech lang-en">We really hope you enjoyed this quick and exciting tour of our beautiful city.</div>
+                <div class="speech lang-tr">Güzel şehrimizin bu hızlı ve heyecan verici turundan gerçekten keyif aldığınızı umuyoruz.</div>
+            </div>
+            <div class="script-line" data-speaker="Yigit">
+                <span class="speaker-name">Yiğit</span>
+                <div class="speech lang-en">Thank you to our dear teacher and all of our friends for listening to us today.</div>
+                <div class="speech lang-tr">Bugün bizi dinleyen değerli öğretmenimize ve tüm arkadaşlarımıza teşekkür ederiz.</div>
+            </div>
+            <div class="script-line" data-speaker="Sefa">
+                <span class="speaker-name">Sefa</span>
+                <div class="speech lang-en">We are thrilled to have shared this with you. We hope to see you all in Erzurum one day! Goodbye!</div>
+                <div class="speech lang-tr">Bunu sizinle paylaşmaktan heyecan duyduk. Bir gün hepinizi Erzurum'da görmeyi umuyoruz! Hoşça kalın!</div>
+            </div>
         </div>
+    </div>
 
-        <div class="script-line" data-speaker="Yigit">
-            <span class="speaker-name">Yiğit</span>
-            <div class="speech lang-en">But it's not just about skiing. Erzurum is like a giant open-air historical museum.</div>
-            <div class="speech lang-tr">Ama sadece kayaktan ibaret değil. Erzurum devasa bir açık hava tarih müzesi gibidir.</div>
+    <!-- ================= TAB 2: QUESTIONS & ANSWERS ================= -->
+    <div id="qa-tab" class="tab-content">
+        <div id="qa-container">
+            
+            <div class="qa-card">
+                <div class="question">
+                    <i class="fas fa-comment-dots"></i>
+                    <div>
+                        <div class="lang-en">Teacher: Who would you like to travel to Erzurum with and why?</div>
+                        <div class="lang-tr">Hoca: Erzurum'a kiminle seyahat etmek istersin ve neden?</div>
+                    </div>
+                </div>
+                <div class="answer">
+                    <div class="lang-en">Student: I would love to go with my friends because enjoying the snow, skiing together, and eating Cağ Kebabı as a group would be extremely fun!</div>
+                    <div class="lang-tr">Öğrenci: Arkadaşlarımla gitmeyi çok isterim çünkü karın tadını çıkarmak, birlikte kayak yapmak ve grupça Cağ Kebabı yemek son derece eğlenceli olurdu!</div>
+                </div>
+            </div>
+
+            <div class="qa-card">
+                <div class="question">
+                    <i class="fas fa-comment-dots"></i>
+                    <div>
+                        <div class="lang-en">Teacher: What are the main tourist attractions we should visit in Erzurum?</div>
+                        <div class="lang-tr">Hoca: Erzurum'da ziyaret etmemiz gereken başlıca turistik yerler nerelerdir?</div>
+                    </div>
+                </div>
+                <div class="answer">
+                    <div class="lang-en">Student: You should definitely visit Palandöken for skiing, Double Minaret Madrasa, Yakutiye Madrasa, Erzurum Castle, and the historical houses of Erzurum.</div>
+                    <div class="lang-tr">Öğrenci: Kayak için Palandöken'i, Çifte Minareli Medrese'yi, Yakutiye Medresesi'ni, Erzurum Kalesi'ni ve tarihi Erzurum evlerini kesinlikle ziyaret etmelisiniz.</div>
+                </div>
+            </div>
+
+            <div class="qa-card">
+                <div class="question">
+                    <i class="fas fa-comment-dots"></i>
+                    <div>
+                        <div class="lang-en">Teacher: What is the best season to visit Erzurum?</div>
+                        <div class="lang-tr">Hoca: Erzurum'u ziyaret etmek için en iyi mevsim hangisidir?</div>
+                    </div>
+                </div>
+                <div class="answer">
+                    <div class="lang-en">Student: If you love winter sports, December to March is perfect. But if you want to explore historical sites comfortably, summer is great because the weather is cool and nice.</div>
+                    <div class="lang-tr">Öğrenci: Kış sporlarını seviyorsanız, Aralık'tan Mart'a kadar olan dönem mükemmeldir. Ancak tarihi yerleri rahatça gezmek istiyorsanız, yaz mevsimi harikadır çünkü hava çok serin ve güzeldir.</div>
+                </div>
+            </div>
+
+            <div class="qa-card">
+                <div class="question">
+                    <i class="fas fa-comment-dots"></i>
+                    <div>
+                        <div class="lang-en">Teacher: How do tourists usually travel to Erzurum?</div>
+                        <div class="lang-tr">Hoca: Turistler Erzurum'a genellikle nasıl seyahat eder?</div>
+                    </div>
+                </div>
+                <div class="answer">
+                    <div class="lang-en">Student: Many people take flights, but the most nostalgic and popular way right now is taking the Eastern Express (Doğu Ekspresi) train for a magical snowy journey.</div>
+                    <div class="lang-tr">Öğrenci: Birçok kişi uçak kullanıyor ama şu an en nostaljik ve popüler yol, büyülü karlı bir manzara için Doğu Ekspresi trenine binmektir.</div>
+                </div>
+            </div>
+
+            <div class="qa-card">
+                <div class="question">
+                    <i class="fas fa-comment-dots"></i>
+                    <div>
+                        <div class="lang-en">Teacher: What is Erzurum most famous for?</div>
+                        <div class="lang-tr">Hoca: Erzurum en çok neyiyle ünlüdür?</div>
+                    </div>
+                </div>
+                <div class="answer">
+                    <div class="lang-en">Student: It is famous for its cold weather, Palandöken Ski Resort, historical places like Double Minaret Madrasa, and delicious Cağ Kebabı.</div>
+                    <div class="lang-tr">Öğrenci: Soğuk havası, Palandöken Kayak Merkezi, Çifte Minareli Medrese gibi tarihi yerleri ve lezzetli Cağ Kebabı ile ünlüdür.</div>
+                </div>
+            </div>
+
+            <div class="qa-card">
+                <div class="question">
+                    <i class="fas fa-comment-dots"></i>
+                    <div>
+                        <div class="lang-en">Teacher: What does the word "Dadaş" mean?</div>
+                        <div class="lang-tr">Hoca: "Dadaş" kelimesi ne anlama gelir?</div>
+                    </div>
+                </div>
+                <div class="answer">
+                    <div class="lang-en">Student: "Dadaş" is a traditional term used for the people of Erzurum. It means a brave man, a loyal brother, and a very generous host.</div>
+                    <div class="lang-tr">Öğrenci: "Dadaş", Erzurum halkı için kullanılan geleneksel bir terimdir. Cesur adam, sadık bir kardeş ve çok cömert bir ev sahibi anlamına gelir.</div>
+                </div>
+            </div>
+
+            <div class="qa-card">
+                <div class="question">
+                    <i class="fas fa-comment-dots"></i>
+                    <div>
+                        <div class="lang-en">Teacher: Can you name a popular traditional dish from Erzurum?</div>
+                        <div class="lang-tr">Hoca: Erzurum'dan popüler bir geleneksel yemek sayabilir misiniz?</div>
+                    </div>
+                </div>
+                <div class="answer">
+                    <div class="lang-en">Student: Yes, Cağ Kebabı is the most popular. It is lamb meat marinated with onions and spices, then roasted horizontally. We also have Kadayıf Dolması as dessert.</div>
+                    <div class="lang-tr">Öğrenci: Evet, en popüleri Cağ Kebabı'dır. Soğan ve baharatlarla marine edilip yatay olarak pişirilen kuzu etidir. Tatlı olarak da Kadayıf Dolması vardır.</div>
+                </div>
+            </div>
+
+            <div class="qa-card">
+                <div class="question">
+                    <i class="fas fa-comment-dots"></i>
+                    <div>
+                        <div class="lang-en">Teacher: Why is Palandöken Mountain important?</div>
+                        <div class="lang-tr">Hoca: Palandöken Dağı neden önemlidir?</div>
+                    </div>
+                </div>
+                <div class="answer">
+                    <div class="lang-en">Student: Because it is one of the best ski resorts in the world. It has very long and steep tracks. It even hosted the 2011 Winter Universiade.</div>
+                    <div class="lang-tr">Öğrenci: Çünkü dünyanın en iyi kayak merkezlerinden biridir. Çok uzun ve dik pistleri vardır. Hatta 2011 Kış Üniversite Oyunları'na ev sahipliği yapmıştır.</div>
+                </div>
+            </div>
+
+            <div class="qa-card">
+                <div class="question">
+                    <i class="fas fa-comment-dots"></i>
+                    <div>
+                        <div class="lang-en">Teacher: Is it hard to learn skiing in Palandöken?</div>
+                        <div class="lang-tr">Hoca: Palandöken'de kayak öğrenmek zor mu?</div>
+                    </div>
+                </div>
+                <div class="answer">
+                    <div class="lang-en">Student: Not at all! Palandöken has different tracks for everyone. There are very easy tracks for beginners and extremely steep tracks for professionals.</div>
+                    <div class="lang-tr">Öğrenci: Kesinlikle hayır! Palandöken'in herkes için farklı pistleri var. Yeni başlayanlar için çok kolay pistler ve profesyoneller için son derece dik pistler bulunur.</div>
+                </div>
+            </div>
+
+            <div class="qa-card">
+                <div class="question">
+                    <i class="fas fa-comment-dots"></i>
+                    <div>
+                        <div class="lang-en">Teacher: What kind of souvenirs can tourists buy from there?</div>
+                        <div class="lang-tr">Hoca: Turistler oradan ne tür hediyelik eşyalar alabilir?</div>
+                    </div>
+                </div>
+                <div class="answer">
+                    <div class="lang-en">Student: The best souvenir is jewelry made of Oltu Stone. You can also buy local products like civil cheese or traditional handmade copper items.</div>
+                    <div class="lang-tr">Öğrenci: En iyi hediyelik eşya Oltu Taşı'ndan yapılan takılardır. Ayrıca civil peyniri gibi yöresel ürünler veya geleneksel el yapımı bakır eşyalar da alabilirsiniz.</div>
+                </div>
+            </div>
+
+            <div class="qa-card">
+                <div class="question">
+                    <i class="fas fa-comment-dots"></i>
+                    <div>
+                        <div class="lang-en">Teacher: What is the historical importance of Erzurum for Turkey?</div>
+                        <div class="lang-tr">Hoca: Erzurum'un Türkiye için tarihi önemi nedir?</div>
+                    </div>
+                </div>
+                <div class="answer">
+                    <div class="lang-en">Student: Erzurum hosted the Erzurum Congress in 1919 led by Mustafa Kemal Atatürk. It is a very important step in the foundation of the Turkish Republic.</div>
+                    <div class="lang-tr">Öğrenci: Erzurum, 1919 yılında Mustafa Kemal Atatürk önderliğindeki Erzurum Kongresi'ne ev sahipliği yapmıştır. Türkiye Cumhuriyeti'nin kuruluşunda çok önemli bir adımdır.</div>
+                </div>
+            </div>
+
+            <div class="qa-card">
+                <div class="question">
+                    <i class="fas fa-comment-dots"></i>
+                    <div>
+                        <div class="lang-en">Teacher: How would you describe the climate of Erzurum?</div>
+                        <div class="lang-tr">Hoca: Erzurum'un iklimini nasıl tarif edersin?</div>
+                    </div>
+                </div>
+                <div class="answer">
+                    <div class="lang-en">Student: Erzurum has a strict continental climate. Winters are very long, snowy, and freezing cold. Summers are short and cool.</div>
+                    <div class="lang-tr">Öğrenci: Erzurum sert bir karasal iklime sahiptir. Kışlar çok uzun, karlı ve dondurucu soğuktur. Yazlar ise kısa ve serindir.</div>
+                </div>
+            </div>
+
+            <div class="qa-card">
+                <div class="question">
+                    <i class="fas fa-comment-dots"></i>
+                    <div>
+                        <div class="lang-en">Teacher: What is the most iconic historical building in Erzurum?</div>
+                        <div class="lang-tr">Hoca: Erzurum'daki en ikonik tarihi yapı hangisidir?</div>
+                    </div>
+                </div>
+                <div class="answer">
+                    <div class="lang-en">Student: The most iconic building is the Double Minaret Madrasa (Çifte Minareli Medrese). It is a beautiful masterpiece from the Seljuk period.</div>
+                    <div class="lang-tr">Öğrenci: En ikonik yapı Çifte Minareli Medrese'dir. Selçuklu döneminden kalma güzel bir şaheserdir.</div>
+                </div>
+            </div>
+
+            <div class="qa-card">
+                <div class="question">
+                    <i class="fas fa-comment-dots"></i>
+                    <div>
+                        <div class="lang-en">Teacher: Why did your group choose Erzurum for this presentation?</div>
+                        <div class="lang-tr">Hoca: Grubunuz bu sunum için neden Erzurum'u seçti?</div>
+                    </div>
+                </div>
+                <div class="answer">
+                    <div class="lang-en">Student: Because we believe Erzurum has a perfect combination of rich history, unique culture, and amazing winter tourism that deserves to be known.</div>
+                    <div class="lang-tr">Öğrenci: Çünkü Erzurum'un; bilinmeyi hak eden zengin tarih, eşsiz kültür ve harika kış turizminin mükemmel bir birleşimine sahip olduğuna inanıyoruz.</div>
+                </div>
+            </div>
+
         </div>
-
-        <div class="script-line" data-speaker="Sefa">
-            <span class="speaker-name">Sefa</span>
-            <div class="speech lang-en">Yes! The Double Minaret Madrasa is our iconic symbol. It's a true masterpiece from the Seljuk Empire.</div>
-            <div class="speech lang-tr">Evet! Çifte Minareli Medrese bizim ikonik sembolümüzdür. Selçuklu İmparatorluğu'ndan kalma gerçek bir şaheser.</div>
-        </div>
-
-        <!-- ROUND 2 -->
-        <div class="script-line" data-speaker="Mecit">
-            <span class="speaker-name">Mecit</span>
-            <div class="speech lang-en">You can also visit the historic Erzurum Castle and Yakutiye Madrasa. They have watched over the city for centuries.</div>
-            <div class="speech lang-tr">Ayrıca tarihi Erzurum Kalesi'ni ve Yakutiye Medresesi'ni de ziyaret edebilirsiniz. Yüzyıllardır şehri gözetliyorlar.</div>
-        </div>
-
-        <div class="script-line" data-speaker="Melih">
-            <span class="speaker-name">Melih</span>
-            <div class="speech lang-en">What about the local culture? The brave people of Erzurum are traditionally called "Dadaş".</div>
-            <div class="speech lang-tr">Peki ya yerel kültür? Erzurum'un cesur insanlarına geleneksel olarak "Dadaş" denir.</div>
-        </div>
-
-        <div class="script-line" data-speaker="Emrullah">
-            <span class="speaker-name">Emrullah</span>
-            <div class="speech lang-en">Dadaş means brother, brave man, and a generous host. We welcome every guest with open arms here.</div>
-            <div class="speech lang-tr">Dadaş; kardeş, yiğit adam ve cömert ev sahibi demektir. Burada her misafiri kollarımızı açarak karşılarız.</div>
-        </div>
-
-        <div class="script-line" data-speaker="Sait">
-            <span class="speaker-name">Sait</span>
-            <div class="speech lang-en">If you want a special souvenir, you must buy Oltu Stone. It's a beautiful black stone used for amazing rings and rosaries.</div>
-            <div class="speech lang-tr">Özel bir hatıra istiyorsanız mutlaka Oltu Taşı almalısınız. Harika yüzükler ve tespihler için kullanılan güzel siyah bir taştır.</div>
-        </div>
-
-        <div class="script-line" data-speaker="Yigit">
-            <span class="speaker-name">Yiğit</span>
-            <div class="speech lang-en">Now, my favorite part: Food! You simply cannot leave Erzurum without eating the famous Cağ Kebabı.</div>
-            <div class="speech lang-tr">Şimdi en sevdiğim kısım: Yemek! Meşhur Cağ Kebabı'nı yemeden Erzurum'dan ayrılamazsınız.</div>
-        </div>
-
-        <div class="script-line" data-speaker="Sefa">
-            <span class="speaker-name">Sefa</span>
-            <div class="speech lang-en">Oh, it is legendary! Delicious lamb meat roasted horizontally over a wood fire. It is simply mouth-watering.</div>
-            <div class="speech lang-tr">Ah, o efsanedir! Odun ateşinde yatay olarak kızartılmış leziz kuzu eti. Kelimenin tam anlamıyla ağız sulandırıyor.</div>
-        </div>
-
-        <!-- ROUND 3 -->
-        <div class="script-line" data-speaker="Mecit">
-            <span class="speaker-name">Mecit</span>
-            <div class="speech lang-en">And for dessert? Kadayıf Dolması! It's a crispy, sweet pastry stuffed with crushed walnuts.</div>
-            <div class="speech lang-tr">Peki ya tatlı? Kadayıf Dolması! Dövülmüş cevizle doldurulmuş çıtır, tatlı bir hamur işidir.</div>
-        </div>
-
-        <div class="script-line" data-speaker="Melih">
-            <span class="speaker-name">Melih</span>
-            <div class="speech lang-en">Don't forget the Ayran Aşı soup and Su Böreği for your breakfast. Our local cuisine is incredibly rich.</div>
-            <div class="speech lang-tr">Kahvaltınız için Ayran Aşı çorbasını ve Su Böreği'ni de unutmayın. Yöresel mutfağımız inanılmaz derecede zengindir.</div>
-        </div>
-
-        <div class="script-line" data-speaker="Emrullah">
-            <span class="speaker-name">Emrullah</span>
-            <div class="speech lang-en">To sum everything up, Erzurum gives you very cold winters but the warmest and most sincere smiles.</div>
-            <div class="speech lang-tr">Her şeyi özetlemek gerekirse; Erzurum size çok soğuk kışlar ama en sıcak ve en samimi gülümsemeleri sunar.</div>
-        </div>
-
-        <div class="script-line" data-speaker="Sait">
-            <span class="speaker-name">Sait</span>
-            <div class="speech lang-en">We really hope you enjoyed this quick and exciting tour of our beautiful city.</div>
-            <div class="speech lang-tr">Güzel şehrimizin bu hızlı ve heyecan verici turundan gerçekten keyif aldığınızı umuyoruz.</div>
-        </div>
-
-        <div class="script-line" data-speaker="Yigit">
-            <span class="speaker-name">Yiğit</span>
-            <div class="speech lang-en">Thank you to our dear teacher and all of our friends for listening to us today.</div>
-            <div class="speech lang-tr">Bugün bizi dinleyen değerli öğretmenimize ve tüm arkadaşlarımıza teşekkür ederiz.</div>
-        </div>
-
-        <div class="script-line" data-speaker="Sefa">
-            <span class="speaker-name">Sefa</span>
-            <div class="speech lang-en">We are thrilled to have shared this with you. We hope to see you all in Erzurum one day! Goodbye!</div>
-            <div class="speech lang-tr">Bunu sizinle paylaşmaktan heyecan duyduk. Bir gün hepinizi Erzurum'da görmeyi umuyoruz! Hoşça kalın!</div>
-        </div>
-
     </div>
 
     <!-- Interactive Logic -->
     <script>
-        // 1. Smooth Scroll Animation
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.1 });
+        // 1. Tab Switching Logic
+        function switchTab(tabId, clickedBtn) {
+            // Update button styles
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            clickedBtn.classList.add('active');
 
-        document.querySelectorAll('.script-line').forEach((el) => observer.observe(el));
-        
-        // Trigger the first elements immediately for a good impression
-        setTimeout(() => {
-            document.querySelectorAll('.script-line').forEach((el, index) => {
-                if(index < 4) el.classList.add('visible');
-            });
-        }, 150);
+            // Hide all tabs, show the selected one
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+        }
 
         // 2. Language Toggle
         let isTurkish = false;
@@ -486,9 +724,8 @@
             isPlaying = !isPlaying;
         }
 
-        // 4. Focus Mode (Speaker Highlighting)
+        // 4. Focus Mode (Speaker Highlighting for Script)
         function highlightSpeaker(speakerName, clickedBtn) {
-            // Manage button active states
             document.querySelectorAll('.speaker-btn').forEach(btn => btn.classList.remove('active'));
             clickedBtn.classList.add('active');
 
@@ -515,19 +752,8 @@
                 }
             });
 
-            // Update status badge
             badge.innerText = `🎤 Bu metinde ${count} konuşman var, sahne senin!`;
             badge.style.opacity = '1';
-            
-            // Smooth scroll to the first highlighted line if on mobile
-            if(window.innerWidth <= 768) {
-                const firstHighlighted = document.querySelector('.script-line.highlighted');
-                if(firstHighlighted) {
-                    setTimeout(() => {
-                        firstHighlighted.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    }, 300);
-                }
-            }
         }
     </script>
 </body>
